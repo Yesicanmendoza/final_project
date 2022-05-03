@@ -10,3 +10,5 @@ first_names = [
     'Aiden', 'Jayden', 'Benjamin', 'Matthew', 'Logan',
     'Chloe', 'Ella', 'Amelia', 'Avery', 'Evelyn', 
 ]
+
+last_names = []
