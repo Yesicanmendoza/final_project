@@ -2,13 +2,14 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 
 class User(db.Model):
     """Data model for the users"""
 
-    __tablename__ = "users"
+    __tablename__ = "users" #create user incomplete information
 
     user_id = db.Column(db.Integer,
                         autoincrement=True,
