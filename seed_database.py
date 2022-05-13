@@ -2,6 +2,7 @@ import os
 import json
 from random import choice, randint
 from datetime import datetime
+from werkzeug.security import generate_password_hash as genph
 
 import data
 import crud
@@ -20,7 +21,7 @@ for index, name in enumerate(data.first_names):
     fname = name
     lname = choice(data.last_names)
     email = f'{name}{index}@email.com'
-    password = '1234'
+    password = genph('1234')
     created_at = datetime.strptime(f'05-08-22', "%m-%d-%y")
 
     user_in_db=crud.create_user(fname, lname, email,

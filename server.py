@@ -9,6 +9,8 @@ from jinja2 import StrictUndefined
 
 from datetime import date
 from datetime import datetime
+from werkzeug.security import check_password_hash as checkph
+from werkzeug.security import generate_password_hash as genph
 
 
 app = Flask(__name__)
@@ -31,21 +33,26 @@ def register_user():
     fname = request.form['fname']
     lname = request.form['lname']
     email = request.form['email']
-    password = request.form["password"]
+    password = genph(request.form["password"])
     created_at = date.today()
 
     #Validation of user info
     user_info = [fname, lname, email, password, created_at]
-    info_completed = None
+    
     for data in user_info:
         if data == '':
-            flash("Please fill up all information spaces.")
+            info_completed = False
             break
         else:
             info_completed = True
 
+    
+
     #Verification that email is not in db and create a new User
-    if info_completed:
+    if info_completed == False:
+        flash("Please fill up all information spaces.")
+    
+    else:
             if crud.get_user_by_email(email):
                 flash("An user with that email already exists. Please enter a different email.")
 
@@ -54,7 +61,7 @@ def register_user():
                 db.session.add(user)
                 db.session.commit()
                 flash("Your account has successfully been created. You may now log in.")
-
+  
             
 
     return redirect("/")
@@ -71,7 +78,7 @@ def user_login():
     user = crud.get_user_by_email(email)
 
     if user:
-        if user.password == password:
+        if checkph(user.password, password):
             session['user_id']= user.user_id
             flash('Logged in!')
         else:
