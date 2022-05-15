@@ -1,7 +1,7 @@
 """Models for movie ratings app."""
 
 from flask_sqlalchemy import SQLAlchemy
-
+#import crud
 
 db = SQLAlchemy()
 
@@ -14,11 +14,11 @@ class User(db.Model):
     user_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    fname = db.Column(db.String, nullable=False)
-    lname = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
+    fname = db.Column(db.String)
+    lname = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
     
 
     
@@ -36,14 +36,14 @@ class Pet(db.Model):
                         autoincrement=True,
                         primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    name = db.Column(db.String, nullable=True)
-    animal_type = db.Column(db.String, nullable=False)
-    pet_type = db.Column(db.String, nullable=False)
-    gender = db.Column(db.String, nullable=False)
-    breed = db.Column(db.String, nullable=False)
-    color = db.Column(db.String, nullable=False)
-    zip_code = db.Column(db.String, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    name = db.Column(db.String)
+    animal_type = db.Column(db.String)
+    pet_type = db.Column(db.String)
+    gender = db.Column(db.String)
+    breed = db.Column(db.String)
+    color = db.Column(db.String)
+    zip_code = db.Column(db.String)
+    date = db.Column(db.DateTime)
     
     user = db.relationship("User", backref="pets")
 

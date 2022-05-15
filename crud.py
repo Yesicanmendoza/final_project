@@ -4,6 +4,7 @@ from model import db, User, Pet, connect_to_db
 #from datetime import datetime
 
 
+
 def create_user(fname, lname, email, password, created_at):
     """Create and return a new user."""
 
@@ -32,9 +33,17 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def get_list_pets_by_user_id(user_id):
+def get_lost_pets_by_user_id(user_id):
+    """Return one lost pet o a list if exits"""
+    
+    return Pet.query.filter(Pet.user_id==user_id, Pet.pet_type=='lost').all()
+
+
+def get_all_pets_by_user_id(user_id):
+    """Return all pets  if exist"""
     
     return Pet.query.filter(Pet.user_id==user_id).all()
+
 
 def create_pet(user_id, name, animal_type, pet_type, 
             gender, breed, color, zip_code, date):

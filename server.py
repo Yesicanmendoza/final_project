@@ -76,11 +76,14 @@ def user_login():
     password = request.form["password"]
 
     user = crud.get_user_by_email(email)
-
+    #If the user has logged in, get the user's ans pet´s information
     if user:
         if checkph(user.password, password):
             session['user_id']= user.user_id
+            session['user_fname']= user.fname
+                   
             flash('Logged in!')
+
         else:
             flash('Wrong password.')
 
@@ -97,14 +100,16 @@ def pet_register_form():
     return render_template('Pet_registration.html')
 
 
+
 @app.route("/pet_registration.json", methods=["POST"])
 def register_pet():
     """Create a new pet."""
     user_id = session.get("user_id")
     
     if user_id is None:
-        flash('Please log in.')        
-    
+        result_text='Please log in.'
+          
+
     else:
         
         name = request.json.get('name') #Can be None
@@ -114,31 +119,85 @@ def register_pet():
         breed=request.json.get('breed')#Sugestions about how to know the breed
         color=request.json.get('color')
         zip_code=request.json.get('zip_code')#Check that is a real zc
-        date=datetime.strptime((request.json.get('date')), "%m-%d-%y")
+        string_date=request.json.get('date')
         
-        pet = crud.create_pet(user_id, name, animal_type, pet_type, 
-            gender, breed, color, zip_code, date)
-        db.session.add(pet)
-        db.session.commit()
-        result_text = f"Your pet has successfully been registrated."
+        
+        #Validation of pet info
+        pet_info = [animal_type, pet_type, 
+            gender, breed, color, zip_code, string_date]
+    
+        for data in pet_info:
+            if data == '' or data == None:
+                info_completed = False
+                break
+            else:
+                info_completed = True
+
+        if info_completed == False:
+            result_text ="Please fill up all information spaces."
+
+        else:
+            date=datetime.strptime(string_date, "%m-%d-%y")
+            pet = crud.create_pet(user_id, name, animal_type, pet_type, 
+                 gender, breed, color, zip_code, date)
+            db.session.add(pet)
+            db.session.commit()
+            result_text = "Your pet has successfully been registrated."
 
     return jsonify({'msg': result_text})
 
 
 
+
 @app.route('/look_for_pet/')
-def get_user_type():
-    """View filter to look for a pet."""
-    user_id = session.get("user_id")
-    list_pets = crud.get_list_pets_by_user_id(user_id)
-    user_type = "User with rescued pet(s)"
-    for pet in list_pets:
-        if pet.pet_type=="lost":
-            user_type = "User with a lost pet"
+def get_pet_information():
+    "Get infotmation about the pet to look for"
+     
+    user_id = session.get("user_id") 
+    
+    if user_id is None:
+        msg='Please log in.'
+          
 
-    return render_template('Looking_lost_pet.html', user_type=user_type, user_id=user_id)
+    else:
+        fname = session["user_fname"]
+    
+        all_pets = crud.get_all_pets_by_user_id(user_id)
+        if len(all_pets)== 0:
+                session['user_type']= 'no_pet'
+        else:
+            
+            lost_pets = crud.get_lost_pets_by_user_id(user_id)
 
-  
+            if len(lost_pets) == 0:
+                session['user_type']='rescue_pet'
+            else:
+                session['user_type']='look_pet'
+   
+        user_type=session['user_type']
+        
+        if user_type == 'no_pet' or user_type == 'rescue_pet':
+            msg = f"{fname}, you do not have pets to look for"
+        
+        elif user_type == 'look_pet':
+            
+            if len(lost_pets)==1:
+                msg = f"{fname}, click in your pet information."
+            else:
+                msg = f"{fname}, select one pet to look for a match."
+
+            
+
+    return render_template('Looking_lost_pet.html', msg=msg, 
+                            fname=fname, pets=lost_pets)
+
+
+@app.route('/lost_pet/<pet_id>.json')
+def get_pet_info(pet_id):
+    pass
+    #return jsonify({'msg': result_text, 'pets':list_pets})
+
+
 
 
     

@@ -6,7 +6,7 @@ function registerPet(evt) {
   const data= {
       name:document.querySelector('#name_field').value,
       animal_type:document.querySelector('#animal_type_field').value,
-      pet_type_field:document.querySelector('#pet_type_field').value, 
+      pet_type:document.querySelector('#pet_type_field').value, 
       gender:document.querySelector('#gender_field').value,  
       breed:document.querySelector('#breed_field').value, 
       color:document.querySelector('#color_field').value, 

@@ -2,10 +2,23 @@
 {% block title %}Look for your pet{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
+<h1>Welcome {{fname}}</h1>
+<div>
+  <p id="message">{{msg}}</p>
+</div>
+ 
+<ul>
+  {% for pet in pets %}
+    <li>
+      <a href="/lost_pet/{{ pet.pet_id }}">
+        {{ pet.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
 
-  <h2>{{user_type}}  {{user_id}}</h2>
-  
 
-  
+
+<script src="/static/look_the_pet.jsx" type="text/jsx"></script>
+
 {% endblock %}
