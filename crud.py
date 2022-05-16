@@ -5,7 +5,7 @@ from model import db, User, Pet, connect_to_db
 
 
 
-def create_user(fname, lname, email, password, created_at):
+def create_user(fname, lname, email, password, created_at):#
     """Create and return a new user."""
 
     user = User(fname=fname, lname=lname,
@@ -21,32 +21,32 @@ def get_users():
     return User.query.all()
 
 
-def get_user_by_id(user_id):
+def get_user_by_id(user_id): #
     """Return user details."""
 
     return User.query.get(user_id)
 
 
-def get_user_by_email(email):
+def get_user_by_email(email): #
     """Return the user if exits"""
 
     return User.query.filter(User.email == email).first()
 
 
-def get_lost_pets_by_user_id(user_id):
+def get_lost_pets_by_user_id(user_id): #
     """Return one lost pet o a list if exits"""
     
     return Pet.query.filter(Pet.user_id==user_id, Pet.pet_type=='lost').all()
 
 
-def get_all_pets_by_user_id(user_id):
+def get_all_pets_by_user_id(user_id): #
     """Return all pets  if exist"""
     
     return Pet.query.filter(Pet.user_id==user_id).all()
 
 
 def create_pet(user_id, name, animal_type, pet_type, 
-            gender, breed, color, zip_code, date):
+            gender, breed, color, zip_code, date): #
     """Create and return a new pet."""
 
     pet = Pet(user_id=user_id, name=name,
@@ -64,14 +64,14 @@ def get_pets():
     return Pet.query.all()
 
 
-def get_rescued_dogs():
-    """Return a list of rescued dogs"""
-    return Pet.query.filter(Pet.animal_type =='dog', Pet.pet_type=='rescued').all()
+def get_pet_by_id(pet_id):#
+    """Return pet details."""
 
+    return Pet.query.get(pet_id)
 
-def get_rescued_cats():
-    """Return a list of rescued cats"""
-    return Pet.query.filter(Pet.animal_type =='cat', Pet.pet_type=='rescued').all()
+def get_rescued_pets(animal_type):#
+    """Return a list of rescued pets by animal type"""
+    return Pet.query.filter(Pet.animal_type == animal_type, Pet.pet_type=='rescued').all()
 
 
 def get_lost_dogs():

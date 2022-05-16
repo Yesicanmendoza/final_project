@@ -30,9 +30,9 @@ def homepage():
 def register_user():
     """Create a new user."""
     #Get user info
-    fname = request.form['fname']
-    lname = request.form['lname']
-    email = request.form['email']
+    fname = (request.form['fname']).title()
+    lname = (request.form['lname']).title()
+    email = (request.form['email']).lower()
     password = genph(request.form["password"])
     created_at = date.today()
 
@@ -72,7 +72,7 @@ def register_user():
 def user_login():
     """Check the password and log in."""
 
-    email = request.form['email']
+    email = (request.form['email']).lower()
     password = request.form["password"]
 
     user = crud.get_user_by_email(email)
@@ -107,17 +107,17 @@ def register_pet():
     user_id = session.get("user_id")
     
     if user_id is None:
-        result_text='Please log in.'
+        msg ='Please log in.'
           
 
     else:
         
-        name = request.json.get('name') #Can be None
+        name = request.json.get('name').title() #Can be None
         animal_type=request.json.get('animal_type')
         pet_type=request.json.get('pet_type')
-        gender=request.json.get('gender')
-        breed=request.json.get('breed')#Sugestions about how to know the breed
-        color=request.json.get('color')
+        gender=request.json.get('gender').lower()
+        breed=request.json.get('breed').lower()        
+        color=request.json.get('color').lower()
         zip_code=request.json.get('zip_code')#Check that is a real zc
         string_date=request.json.get('date')
         
@@ -134,7 +134,7 @@ def register_pet():
                 info_completed = True
 
         if info_completed == False:
-            result_text ="Please fill up all information spaces."
+            msg ="Please fill up all information spaces."
 
         else:
             date=datetime.strptime(string_date, "%m-%d-%y")
@@ -142,9 +142,9 @@ def register_pet():
                  gender, breed, color, zip_code, date)
             db.session.add(pet)
             db.session.commit()
-            result_text = "Your pet has successfully been registrated."
+            msg = "Your pet has successfully been registrated."
 
-    return jsonify({'msg': result_text})
+    return jsonify({'msg': msg})
 
 
 
@@ -154,7 +154,9 @@ def get_pet_information():
     "Get infotmation about the pet to look for"
      
     user_id = session.get("user_id") 
-    
+    fname = 'Uknown'
+    lost_pets = []
+
     if user_id is None:
         msg='Please log in.'
           
@@ -192,8 +194,30 @@ def get_pet_information():
                             fname=fname, pets=lost_pets)
 
 
-@app.route('/lost_pet/<pet_id>.json')
+@app.route('/lost_pet/<pet_id>')
 def get_pet_info(pet_id):
+    lost_pet = crud.Pet.query.get(pet_id)
+    animal_type = lost_pet.animal_type
+
+    all_rescued_pets = crud.get_rescued_pets(animal_type)
+    
+    matches = []
+    for pet in all_rescued_pets:
+        if pet.gender == lost_pet.gender and pet.date >= lost_pet.date:
+            if lost_pet.breed in pet.breed:
+                if lost_pet.color in pet.color:
+                    matches.append(pet) 
+                    msg = 'Here are the matches:'
+    
+    if len(matches)==0:               
+        msg = 'There are not matches'
+    
+    return render_template('matches.html', msg=msg, 
+                           matches=matches)
+
+            
+           
+    
     pass
     #return jsonify({'msg': result_text, 'pets':list_pets})
 

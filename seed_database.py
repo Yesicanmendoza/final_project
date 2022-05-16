@@ -18,9 +18,9 @@ model.db.create_all()
 #Create user
 users_in_db=[]
 for index, name in enumerate(data.first_names):
-    fname = name
-    lname = choice(data.last_names)
-    email = f'{name}{index}@email.com'
+    fname = name.title()
+    lname = (choice(data.last_names)).title()
+    email = f'{name.lower()}{index}@email.com'
     password = genph('1234')
     created_at = datetime.strptime(f'05-08-22', "%m-%d-%y")
 
@@ -37,11 +37,11 @@ def create_db_rescued_pets(list_of_pets, animal_type):
     rescued_pet_in_db = []
     for pet in list_of_pets:
         user_id = pet["user_id"]
-        name = pet["pet_name"]
+        name = (pet["pet_name"]).title()
         pet_type = "rescued"
-        gender = pet["gender"]
-        breed = pet["breed"]
-        color = pet["color"]
+        gender = (pet["gender"]).lower()
+        breed = (pet["breed"]).lower()
+        color = (pet["color"]).lower()
         zip_code = pet["zip_code"]    
         date = datetime.strptime(pet["date"], "%m-%d-%y")
     
