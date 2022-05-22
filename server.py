@@ -118,31 +118,38 @@ def register_pet():
         gender=request.json.get('gender').lower()
         breed=request.json.get('breed').lower()        
         color=request.json.get('color').lower()
-        zip_code=request.json.get('zip_code')#Check that is a real zc
+        location=request.json.get('location')
+        center=request.json.get('center')
         string_date=request.json.get('date')
-        
+        lat=request.json.get('lat')
+        lng=request.json.get('lng')
         
         #Validation of pet info
-        pet_info = [animal_type, pet_type, 
-            gender, breed, color, zip_code, string_date]
+        if lat == '':
+            msg = "Please introduce a valid address"
+        
+        else:            
+            pet_info = [animal_type, pet_type, 
+                    gender, breed, color, location, 
+                    lat, lng, string_date]
     
-        for data in pet_info:
-            if data == '' or data == None:
-                info_completed = False
-                break
+            for data in pet_info:
+                if data == '' or data == None:
+                    info_completed = False
+                    break
+                else:
+                    info_completed = True
+
+            if info_completed == False:
+                msg =f"Please fill up all information spaces."
+              
             else:
-                info_completed = True
-
-        if info_completed == False:
-            msg ="Please fill up all information spaces."
-
-        else:
-            date=datetime.strptime(string_date, "%m-%d-%y")
-            pet = crud.create_pet(user_id, name, animal_type, pet_type, 
-                 gender, breed, color, zip_code, date)
-            db.session.add(pet)
-            db.session.commit()
-            msg = "Your pet has successfully been registrated."
+                date=datetime.strptime(string_date, "%m-%d-%y")
+                pet = crud.create_pet(user_id, name, animal_type, pet_type, 
+                    gender, breed, color, location, lat, lng, date)
+                db.session.add(pet)
+                db.session.commit()
+                msg = "Your pet has successfully been registrated."
 
     return jsonify({'msg': msg})
 

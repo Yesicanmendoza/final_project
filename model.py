@@ -1,4 +1,4 @@
-"""Models for movie ratings app."""
+"""Models for find your pet app."""
 
 from flask_sqlalchemy import SQLAlchemy
 #import crud
@@ -42,13 +42,15 @@ class Pet(db.Model):
     gender = db.Column(db.String)
     breed = db.Column(db.String)
     color = db.Column(db.String)
-    zip_code = db.Column(db.String)
+    location = db.Column(db.String)
+    lat = db.Column(db.Integer)
+    lng = db.Column(db.Integer)
     date = db.Column(db.DateTime)
     
     user = db.relationship("User", backref="pets")
 
     def __repr__(self):
-        return f'<Pet animal_type={self.animal_type} pet_type={self.pet_type}>'
+        return f'<Pet name={self.name} animal_type={self.animal_type} pet_type={self.pet_type}>'
 
 
 

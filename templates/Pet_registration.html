@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Pet registration{% endblock %}
+
 {% block body %}
 
 <h2>Introduce your pet information</h2>
@@ -27,12 +28,17 @@
       Color: <input type="text" name="color" id="color_field">
     </p>
     <p>
-      Zip code of the location where you lost or found the pet: <input type="text" name="zip_code" id="zip_code_field">>
+      Address of the location where you lost or found the pet: 
+      <div><input type="text" name="location" id="location_field">></div>
     </p>
     <p>
       Date when you lost or found the pet(m-d-y): <input type="text" name="date" id="date_field">>
     </p>
 
+    <section class="map">
+      <div id="map"></div>
+    </section>
+    
     <p>
       <input type="submit">
     </p>   
@@ -50,7 +56,10 @@
 </div>
 
   <script src="/static/pet_info.js"></script>
-
+  <script
+    async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJE2gIjshSu3xoXxDVLvuJ4YxTAyV_Udo&callback=initMap">
+  </script>
 
 
 {% endblock %}

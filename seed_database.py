@@ -42,12 +42,14 @@ def create_db_rescued_pets(list_of_pets, animal_type):
         gender = (pet["gender"]).lower()
         breed = (pet["breed"]).lower()
         color = (pet["color"]).lower()
-        zip_code = pet["zip_code"]    
+        location = pet["location"]   
+        lat=pet['lat'] 
+        lng=pet['lng']
         date = datetime.strptime(pet["date"], "%m-%d-%y")
     
         db_rescued_pet= crud.create_pet(
             user_id, name, animal_type, pet_type, 
-            gender, breed, color, zip_code, date)
+            gender, breed, color, location, lat, lng, date)
 
         rescued_pet_in_db.append(db_rescued_pet)
 
@@ -61,8 +63,8 @@ model.db.session.commit()
 
 
 #Create a db for rescued cats
-rescued_cats_in_db=create_db_rescued_pets(data.list_rescued_cats, "cat")
-model.db.session.add_all(rescued_cats_in_db)
-model.db.session.commit()
+#rescued_cats_in_db=create_db_rescued_pets(data.list_rescued_cats, "cat")
+#model.db.session.add_all(rescued_cats_in_db)
+#model.db.session.commit()
 
 
