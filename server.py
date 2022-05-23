@@ -158,8 +158,8 @@ def register_pet():
 
 @app.route('/look_for_pet/')
 def get_pet_information():
-    "Get infotmation about the pet to look for"
-     
+    "Get infotmation about the pet(s) to look for"
+    #Get user info    
     user_id = session.get("user_id") 
     fname = 'Uknown'
     lost_pets = []
@@ -167,7 +167,7 @@ def get_pet_information():
     if user_id is None:
         msg='Please log in.'
           
-
+    #Define user type
     else:
         fname = session["user_fname"]
     
@@ -187,7 +187,7 @@ def get_pet_information():
         
         if user_type == 'no_pet' or user_type == 'rescue_pet':
             msg = f"{fname}, you do not have pets to look for"
-        
+        #Get list of pets
         elif user_type == 'look_pet':
             
             if len(lost_pets)==1:
@@ -197,8 +197,9 @@ def get_pet_information():
 
             
 
-    return render_template('Looking_lost_pet.html', msg=msg, 
+    return render_template('Showing_lost_pet.html', msg=msg, 
                             fname=fname, pets=lost_pets)
+
 
 
 @app.route('/lost_pet/<pet_id>')
@@ -213,20 +214,34 @@ def get_pet_info(pet_id):
         if pet.gender == lost_pet.gender and pet.date >= lost_pet.date:
             if lost_pet.breed in pet.breed:
                 if lost_pet.color in pet.color:
-                    matches.append(pet) 
-                    msg = 'Here are the matches:'
+                    matches.append(pet)            
     
+
     if len(matches)==0:               
         msg = 'There are not matches'
     
-    return render_template('matches.html', msg=msg, 
-                           matches=matches)
+    else:
+        msg = 'Here are the matches:'
 
-            
-           
+        match_pet_list = []
+        #Changing the pets ogject, for a dictionary
+        for pet in matches:
+            pet_dict = {}
+            pet_dict['pet_id'] = pet.pet_id
+            pet_dict['name'] = pet.name
+            pet_dict['animal_type'] = pet.animal_type
+            pet_dict['pet_type'] = pet.pet_type
+            pet_dict['gender'] = pet.gender  
+            pet_dict['breed'] = pet.breed
+            pet_dict['color '] = pet.color  
+            pet_dict['date'] = pet.date 
+            pet_dict['location'] = pet.location
+            pet_dict['lat'] = pet.lat
+            pet_dict['lng'] = pet.lng
+            match_pet_list.append(pet_dict)
+
     
-    pass
-    #return jsonify({'msg': result_text, 'pets':list_pets})
+    return jsonify({'msg': msg, 'match_pet_list':match_pet_list})
 
 
 
