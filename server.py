@@ -202,8 +202,11 @@ def get_pet_information():
 
 
 
-@app.route('/lost_pet/<pet_id>')
+
+
+@app.route('/lost_pet/<pet_id>/')
 def get_pet_info(pet_id):
+    
     lost_pet = crud.Pet.query.get(pet_id)
     animal_type = lost_pet.animal_type
 
@@ -242,6 +245,18 @@ def get_pet_info(pet_id):
 
     
     return jsonify({'msg': msg, 'match_pet_list':match_pet_list})
+
+
+#@app.route('/lost_pet/<pet_id>/')
+#def show_list_matches(pet_id):
+#    """Show list of matches."""
+    
+#    return render_template('matches.html')
+
+
+
+
+
 
 
 
