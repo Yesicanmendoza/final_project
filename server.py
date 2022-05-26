@@ -191,7 +191,7 @@ def get_pet_information():
         elif user_type == 'look_pet':
             
             if len(lost_pets)==1:
-                msg = f"{fname}, click in your pet information."
+                msg = f"{fname}, click in your pet's name."
             else:
                 msg = f"{fname}, select one pet to look for a match."
 
@@ -201,12 +201,18 @@ def get_pet_information():
                             fname=fname, pets=lost_pets)
 
 
-
-
-
 @app.route('/lost_pet/<pet_id>/')
-def get_pet_info(pet_id):
+def show_list_matches(pet_id):
+    """Show list of matches."""
+    session['pet_id'] = pet_id
     
+    return render_template('matches.html')
+
+
+
+@app.route('/matches.json')
+def get_pet_info():
+    pet_id = session['pet_id']
     lost_pet = crud.Pet.query.get(pet_id)
     animal_type = lost_pet.animal_type
 
@@ -225,8 +231,10 @@ def get_pet_info(pet_id):
     
     else:
         msg = 'Here are the matches:'
-
-        match_pet_list = []
+        matches.append(lost_pet)
+        #This is necesary fetch the lost pet info and 
+        #matches info
+        match_and_lost_pet= []
         #Changing the pets ogject, for a dictionary
         for pet in matches:
             pet_dict = {}
@@ -241,17 +249,18 @@ def get_pet_info(pet_id):
             pet_dict['location'] = pet.location
             pet_dict['lat'] = pet.lat
             pet_dict['lng'] = pet.lng
-            match_pet_list.append(pet_dict)
+            pet_user = crud.get_user_by_id(pet.user_id)
+            pet_dict['user_name'] = pet_user.fname
+            pet_dict['user_email'] = pet_user.email
+            
+            match_and_lost_pet.append(pet_dict)
 
     
-    return jsonify({'msg': msg, 'match_pet_list':match_pet_list})
+    return jsonify({'msg': msg, 'match_and_lost_pet':match_and_lost_pet})
 
 
-#@app.route('/lost_pet/<pet_id>/')
-#def show_list_matches(pet_id):
-#    """Show list of matches."""
-    
-#    return render_template('matches.html')
+
+
 
 
 

@@ -43,8 +43,8 @@ class Pet(db.Model):
     breed = db.Column(db.String)
     color = db.Column(db.String)
     location = db.Column(db.String)
-    lat = db.Column(db.Integer)
-    lng = db.Column(db.Integer)
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
     date = db.Column(db.DateTime)
     
     user = db.relationship("User", backref="pets")

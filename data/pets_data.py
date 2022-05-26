@@ -7,21 +7,21 @@ rescued_dogs = [{'pet_name': 'Archibald', 'user_id': 1, 'animal_type': 'dog', 'p
 
 dates = ['05-01-22', '04-29-22', '04-15-22', '04-05-22']
 
-locations = [ "1540 W El Camino Ave, Sacramento, CA 95833", "5309 Sunrise Blvd, Fair Oaks, CA 95628", "1117 Roseville Square, Roseville, CA 95678", "850 E Bidwell St, Folsom, CA 95630", ]
-
-def add_location(list_pets, locations):
+#locations = [ "1540 W El Camino Ave, Sacramento, CA 95833", "5309 Sunrise Blvd, Fair Oaks, CA 95628", "1117 Roseville Square, Roseville, CA 95678", "850 E Bidwell St, Folsom, CA 95630", ]
+address="1117 Roseville Square, Roseville, CA 95678"
+def add_location(list_pets):
     new_list_pets = []
     for pet in list_pets:
-        pet["location"]=str(choice(locations))
-        new_list_pets.append(pet)
-        pet['lat'] = 38.6681981
-        pet['lng'] = -121.2382059
+        pet["location"]=address        
+        pet['lat'] = 38.7462886
+        pet['lng'] = -121.274886
         pet['date']=choice(dates)
+        new_list_pets.append(pet)
     return new_list_pets
 
-list_rescued_dogs = add_location(rescued_dogs, locations)
+list_rescued_dogs = add_location(rescued_dogs)
 print(list_rescued_dogs)
 
-list_rescued_cats = add_location(rescued_cats, locations)
+list_rescued_cats = add_location(rescued_cats)
 #print(list_rescued_cats)
 
