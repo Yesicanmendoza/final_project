@@ -1,35 +1,30 @@
+function ShowingMatches(props) {
+  return (
+    <div className="match_pet">
+      <p>Name: {props.name}</p>
+      <p>Breed: {props.breed} </p>
+      <p>Color: {props.color} </p>
+      <p>Address where he/she was found: {props.location}</p>
+      <p>Rescuer's name: {props.user_name}</p>
+      <p>Rescuer's email: {props.user_email}</p>
+    </div>
+  );
+}
 
-function initMap() {
-  const map = new google.maps.Map(document.querySelector('#map'), {
-    center: {
-      lat: 37.601773,
-      lng: -122.20287,
-    },
-    zoom: 11,
-  });
-
-};
 
 function degreesToRadians(degrees){
   return degrees * Math.PI / 180;
 };
 
 function getDistance(center_from, center_to){
-  // El radio del planeta tierra en metros.
+  
   const longitudeFrom = center_from.lng;
-  //console.log(longitudeFrom);
   const longitudeTo = center_to.lng;
-  console.log(longitudeTo);
   const latitudeFrom = center_from.lat;
-  //console.log(latitudeFrom);
   const latitudeTo = center_to.lat;
-  console.log(latitudeTo)
-
   const R = 6378137;
-  const dLat = degreesToRadians(latitudeTo - latitudeFrom);
-  //console.log(dLat);
-  const dLong = degreesToRadians(longitudeTo - longitudeFrom);
-  //console.log(dLong);
+  const dLat = degreesToRadians(latitudeTo - latitudeFrom);  
+  const dLong = degreesToRadians(longitudeTo - longitudeFrom);  
   const a = (Math.sin(dLat / 2)
           *
           Math.sin(dLat / 2) 
@@ -42,39 +37,44 @@ function getDistance(center_from, center_to){
           * 
           Math.sin(dLong / 2));
   
-  //console.log(a);
-
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  //console.log(c);
-
+  
   const distance = R * c * 0.000621371;
 
   return distance;
-}
+};
 
 
 fetch('/matches.json')
   .then(response => response.json())
   .then(Data => {    
     const matches=Data.match_and_lost_pet;
-    console.log(matches);
-    //const len =match_lost_list.length;    
-    const lost_pet = matches.pop();
-    console.log(lost_pet);    
-    console.log(matches);
-    const center_lost_pet = {'lat':lost_pet.lat, 'lng':lost_pet.lng};
+    //console.log(matches);
+    if (matches != null){
+      const lost_pet = matches.pop();
+      console.log(lost_pet);    
+      console.log(matches);
+      const center_lost_pet = {'lat':lost_pet.lat, 'lng':lost_pet.lng};
+      const final_match = [];
+      for (const pet of matches){
+        const center={};
+        center['lat']=pet.lat;
+        center['lng']=pet.lng;
+        //console.log(center);
+        const distance = getDistance(center_lost_pet, center);
+        console.log(distance);
 
-    for (const pet of matches){
-      const center={};
-      center['lat']=pet.lat;
-      center['lng']=pet.lng;
-      //console.log(center);
-      const distance = getDistance(center_lost_pet, center);
-      console.log(distance);
-    }
+        if (distance <= 30){
+          final_match.push(pet);
 
+        }           
+      }
+      console.log(final_match);
+    };
+    
+      
     document.querySelector('#message').innerHTML = Data.msg;
-  });
+    });
 
 
   

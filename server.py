@@ -228,7 +228,8 @@ def get_pet_info():
 
     if len(matches)==0:               
         msg = 'There are not matches'
-    
+        match_and_lost_pet = None
+        
     else:
         msg = 'Here are the matches:'
         matches.append(lost_pet)
