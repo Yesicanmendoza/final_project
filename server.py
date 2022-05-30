@@ -245,7 +245,7 @@ def get_pet_info():
             pet_dict['pet_type'] = pet.pet_type
             pet_dict['gender'] = pet.gender  
             pet_dict['breed'] = pet.breed
-            pet_dict['color '] = pet.color  
+            pet_dict['color'] = pet.color  
             pet_dict['date'] = pet.date 
             pet_dict['location'] = pet.location
             pet_dict['lat'] = pet.lat
