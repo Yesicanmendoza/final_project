@@ -260,7 +260,14 @@ def get_pet_info():
     return jsonify({'msg': msg, 'match_and_lost_pet':match_and_lost_pet})
 
 
-
+@app.route("/change_pet_type.json", methods=["POST"])
+def change_pet_type():
+    """Change the pet type to found."""
+    id_lost_pet = session['pet_id']     
+    id_match_pet = request.json.get('macth_pet_id')
+    msg2 = 'We have changed the pet type status to "found".'
+    
+    return jsonify({'msg2': msg2})
 
 
 
