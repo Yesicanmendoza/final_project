@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://www.oregonhumane.org/adopt/?type=cats"
+url = "https://www.oregonhumane.org/adopt/?type=dogs"
 
+#"https://www.oregonhumane.org/adopt/?type=cats"
 #"https://www.oregonhumane.org/adopt/?type=dogs"
 
 result = requests.get(url).text
@@ -11,6 +12,7 @@ doc = BeautifulSoup(result, "html.parser")
 
 info_pets = doc.find_all("div", class_="result-item")
 
+#print(info_pets)
 
 
 pets= []
@@ -24,7 +26,8 @@ for info_pet in info_pets:
 
    pet["user_id"] = user_id
 
-   pet["animal_type"]= "cat"
+   pet["animal_type"]= "dog"
+   #"cat"
    #dog
 
    pet["pet_type"] = "rescued"
@@ -38,8 +41,8 @@ for info_pet in info_pets:
    color = info_pet.find("span", class_="color").text.strip()
    pet["color"] = color
 
-   #img = info_pet.find("img", class_=" lazyloaded")
-   #pet["img"] = img
+   img = info_pet.find("img").get('src')
+   pet["img"] = img
 
 
    user_id = user_id + 1

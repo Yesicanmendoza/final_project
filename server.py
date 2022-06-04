@@ -262,11 +262,15 @@ def get_pet_info():
 
 @app.route("/change_pet_type.json", methods=["POST"])
 def change_pet_type():
-    """Change the pet type to found."""
-    id_lost_pet = session['pet_id']     
-    id_match_pet = request.json.get('macth_pet_id')
-    msg2 = 'We have changed the pet type status to "found".'
-    
+    """Change the pet type to found."""    
+    id_lost_pet = session['pet_id']         
+    id_match_pet = request.json.get('match_pet_id') 
+    lost_pet=crud.get_pet_by_id(id_lost_pet)
+    lost_pet.pet_type='found'
+    match_pet=crud.get_pet_by_id(id_match_pet)
+    match_pet.pet_type='found'    
+    db.session.commit()
+    msg2 = f'We have changed the pet type status to "found".'
     return jsonify({'msg2': msg2})
 
 

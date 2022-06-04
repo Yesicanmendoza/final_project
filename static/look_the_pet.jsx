@@ -63,7 +63,8 @@ function AskIfPetWasFound() {
 function changePetType(evt) {
   evt.preventDefault();
 
-  const data= {match_pet_id:document.querySelector('option[name="pet_id_match"').value};
+  const data= {match_pet_id:document.querySelector('option[name="pet_id_match"').value,};
+  console.log(data);
   
   const url = '/change_pet_type.json'; 
   fetch(url, {  
@@ -152,18 +153,18 @@ fetch('/matches.json')
     };  
     console.log(final_match);
     console.log(pet_id_matches);
+
+    if (final_match === []){
+      msg = 'There are not matches around 30 miles';
+    }else {
+      ReactDOM.render(<PetMatchesContainer />, document.getElementById('matches'));
+      ReactDOM.render(<AskIfPetWasFound />, document.getElementById('foundPet'));
+      document.querySelector('#found_pet form').addEventListener('submit', changePetType);
+           
+    };
   };   
   
-  if (final_match === []){
-    msg = 'There are not matches around 30 miles';
-  }else {
-    ReactDOM.render(<PetMatchesContainer />, document.getElementById('matches'));
-    ReactDOM.render(<AskIfPetWasFound />, document.getElementById('foundPet'));
-    document.querySelector('#found_pet form').addEventListener('submit', changePetType);
-    //ReactDOM.render(<PetIdMatchContainer />, document.getElementById('pet_id_matches'));
-    //ReactDOM.render(<SubmitPetId />, document.getElementById('submit'));
-    
-  };
+
   document.querySelector('#message').innerHTML = msg;
  });
 
