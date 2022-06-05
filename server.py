@@ -1,7 +1,7 @@
 """Server for movie ratings app."""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect, jsonify)
+                   redirect, jsonify, url_for)
 from model import connect_to_db, db
 import crud
 
@@ -11,6 +11,14 @@ from datetime import date
 from datetime import datetime
 from werkzeug.security import check_password_hash as checkph
 from werkzeug.security import generate_password_hash as genph
+
+import cloudinary.uploader
+import cloudinary.api
+import os
+
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
+CLOUD_NAME = 'yesicamendoza'
 
 
 app = Flask(__name__)
@@ -101,6 +109,7 @@ def pet_register_form():
 
 
 
+
 @app.route("/pet_registration.json", methods=["POST"])
 def register_pet():
     """Create a new pet."""
@@ -149,10 +158,30 @@ def register_pet():
                     gender, breed, color, location, lat, lng, date)
                 db.session.add(pet)
                 db.session.commit()
-                msg = "Your pet has successfully been registrated."
-
+                msg = "Information saved, please continue with the step two."
+                session['new_pet_id']=pet.pet_id
     return jsonify({'msg': msg})
 
+
+@app.route("/register_a_pet/pet_image", methods=['POST'])
+def get_url_img():
+    """Get the image of the pet."""
+    new_pet_id=session.get('new_pet_id')
+
+    my_file = request.files["img"]
+    result =  cloudinary.uploader.upload(my_file, 
+                                        api_key=CLOUDINARY_KEY, 
+                                        api_secret=CLOUDINARY_SECRET, 
+                                        cloud_name=CLOUD_NAME)
+    
+    img=result['secure_url']
+    print(img)    
+    if new_pet_id == None:
+        flash("Please fill up the pet's information first")
+    else:
+        flash("Your pet has successfully been registrated.")
+
+    return redirect("/")
 
 
 
