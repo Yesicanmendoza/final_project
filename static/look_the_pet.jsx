@@ -4,10 +4,12 @@ function MatchInfo(props) {
       <p>Pet's id: {props.pet_id}</p>
       <p>Name: {props.name}</p>
       <p>Breed: {props.breed} </p>
+      <p>Gender: {props.gender} </p>
       <p>Color: {props.color} </p>
       <p>Address where the pet was found: {props.location}</p>
       <p>Rescuer's name: {props.user_name}</p>
       <p>Rescuer's email: {props.user_email}</p>
+      <img src={props.img} alt="profile" />
     </div>
   );
 };
@@ -23,10 +25,12 @@ function PetMatchesContainer(){
         pet_id={pet.pet_id}
         name={pet.name}
         breed={pet.breed}
+        gender={pet.gender}
         color={pet.color}
         location={pet.location}
         user_name={pet.user_name}
-        user_email={pet.user_email}        
+        user_email={pet.user_email} 
+        img={pet.img}       
       />,
     );
   };  
@@ -146,7 +150,7 @@ fetch('/matches.json')
       const distance = getDistance(center_lost_pet, center);
       console.log(distance);
       
-      if (distance <= 30){
+      if (distance <= 35){
         pet_id_matches.push(pet.pet_id);
         final_match.push(pet);
       };          

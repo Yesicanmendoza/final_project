@@ -46,14 +46,14 @@ def get_all_pets_by_user_id(user_id): #
 
 
 def create_pet(user_id, name, animal_type, pet_type, 
-            gender, breed, color, location, lat, lng, date): #
+            gender, breed, color, location, lat, lng, date, img): #
     """Create and return a new pet."""
 
     pet = Pet(user_id=user_id, name=name,
                 animal_type=animal_type, pet_type=pet_type,
                 gender=gender, breed=breed,
                 color=color, location=location,
-                lat=lat, lng=lng, date=date)
+                lat=lat, lng=lng, date=date, img=img)
 
     return pet
 

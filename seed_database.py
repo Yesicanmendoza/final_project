@@ -46,10 +46,11 @@ def create_db_rescued_pets(list_of_pets, animal_type):
         lat=pet['lat'] 
         lng=pet['lng']
         date = datetime.strptime(pet["date"], "%m-%d-%y")
+        img=pet['img']
     
         db_rescued_pet= crud.create_pet(
             user_id, name, animal_type, pet_type, 
-            gender, breed, color, location, lat, lng, date)
+            gender, breed, color, location, lat, lng, date, img)
 
         rescued_pet_in_db.append(db_rescued_pet)
 

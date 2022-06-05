@@ -46,6 +46,7 @@ class Pet(db.Model):
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
     date = db.Column(db.DateTime)
+    img = db.Column(db.String)
     
     user = db.relationship("User", backref="pets")
 

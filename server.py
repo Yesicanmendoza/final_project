@@ -154,8 +154,9 @@ def register_pet():
               
             else:
                 date=datetime.strptime(string_date, "%m-%d-%y")
+                img="/static/Noimage.PNG"
                 pet = crud.create_pet(user_id, name, animal_type, pet_type, 
-                    gender, breed, color, location, lat, lng, date)
+                    gender, breed, color, location, lat, lng, date, img)
                 db.session.add(pet)
                 db.session.commit()
                 msg = "Information saved, please continue with the step two."
@@ -179,6 +180,9 @@ def get_url_img():
     if new_pet_id == None:
         flash("Please fill up the pet's information first")
     else:
+        pet=get_pet_by_id(new_pet_id)
+        pet.img = img
+        db.session.commit()
         flash("Your pet has successfully been registrated.")
 
     return redirect("/")
@@ -270,8 +274,8 @@ def get_pet_info():
             pet_dict = {}
             pet_dict['pet_id'] = pet.pet_id
             pet_dict['name'] = pet.name
-            pet_dict['animal_type'] = pet.animal_type
-            pet_dict['pet_type'] = pet.pet_type
+            #pet_dict['animal_type'] = pet.animal_type
+            #pet_dict['pet_type'] = pet.pet_type
             pet_dict['gender'] = pet.gender  
             pet_dict['breed'] = pet.breed
             pet_dict['color'] = pet.color  
@@ -279,6 +283,7 @@ def get_pet_info():
             pet_dict['location'] = pet.location
             pet_dict['lat'] = pet.lat
             pet_dict['lng'] = pet.lng
+            pet_dict['img'] = pet.img
             pet_user = crud.get_user_by_id(pet.user_id)
             pet_dict['user_name'] = pet_user.fname
             pet_dict['user_email'] = pet_user.email
