@@ -180,7 +180,7 @@ def get_url_img():
     if new_pet_id == None:
         flash("Please fill up the pet's information first")
     else:
-        pet=get_pet_by_id(new_pet_id)
+        pet=crud.get_pet_by_id(new_pet_id)
         pet.img = img
         db.session.commit()
         flash("Your pet has successfully been registrated.")
