@@ -134,6 +134,9 @@ def register_pet():
         lng=request.json.get('lng')
         
         #Validation of pet info
+        if name =='':
+            name="Unknown"
+
         if lat == '':
             msg = "Please introduce a valid address"
         
@@ -195,7 +198,7 @@ def get_pet_information():
     #Get user info    
     user_id = session.get("user_id") 
     fname = 'Uknown'
-    lost_pets = []
+    pets_to_look=[]
 
     if user_id is None:
         msg='Please log in.'
@@ -203,35 +206,26 @@ def get_pet_information():
     #Define user type
     else:
         fname = session["user_fname"]
-    
+        all_pets = []
         all_pets = crud.get_all_pets_by_user_id(user_id)
-        if len(all_pets)== 0:
-                session['user_type']= 'no_pet'
-        else:
-            
-            lost_pets = crud.get_lost_pets_by_user_id(user_id)
 
-            if len(lost_pets) == 0:
-                session['user_type']='rescue_pet'
-            else:
-                session['user_type']='look_pet'
-   
-        user_type=session['user_type']
-        
-        if user_type == 'no_pet' or user_type == 'rescue_pet':
+        for pet in all_pets:
+            if pet.pet_type != 'found':
+                pets_to_look.append(pet)
+
+
+        if len(pets_to_look)== 0:
             msg = f"{fname}, you do not have pets to look for"
-        #Get list of pets
-        elif user_type == 'look_pet':
-            
-            if len(lost_pets)==1:
-                msg = f"{fname}, click in your pet's name."
+        else:            
+            if len(pets_to_look)==1:
+                msg = f"{fname}, click in your pet's name to look for a match."
             else:
-                msg = f"{fname}, select one pet to look for a match."
+                msg = f"{fname}, select one pet to look for by clicking the name."
 
             
 
     return render_template('Showing_lost_pet.html', msg=msg, 
-                            fname=fname, pets=lost_pets)
+                            fname=fname, pets=pets_to_look)
 
 
 @app.route('/lost_pet/<pet_id>/')
@@ -246,29 +240,34 @@ def show_list_matches(pet_id):
 @app.route('/matches.json')
 def get_pet_info():
     pet_id = session['pet_id']
-    lost_pet = crud.Pet.query.get(pet_id)
-    animal_type = lost_pet.animal_type
+    pet_to_look = crud.Pet.query.get(pet_id)
+    animal_type = pet_to_look.animal_type
+    pet_type = pet_to_look.pet_type
 
-    all_rescued_pets = crud.get_rescued_pets(animal_type)
+    if pet_type=="lost":
+        pet_list=crud.get_rescued_pets(animal_type)
+    elif pet_type=="rescued":
+        pet_list=crud.get_lost_pets(animal_type)   
     
     matches = []
-    for pet in all_rescued_pets:
-        if pet.gender == lost_pet.gender and pet.date >= lost_pet.date:
-            if lost_pet.breed in pet.breed:
-                if lost_pet.color in pet.color:
+    for pet in pet_list:
+        if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:
+            if pet_to_look.breed in pet.breed:
+                if pet_to_look.color in pet.color:
                     matches.append(pet)            
     
 
+    matches_and_pet_to_look = []
+
     if len(matches)==0:               
         msg = 'There are not matches'
-        match_and_lost_pet = None
+        matches_and_pet_to_look = None
         
     else:
         msg = 'Here are the matches:'
-        matches.append(lost_pet)
-        #This is necesary fetch the lost pet info and 
-        #matches info
-        match_and_lost_pet= []
+        matches.append(pet_to_look)
+       
+        
         #Changing the pets ogject, for a dictionary
         for pet in matches:
             pet_dict = {}
@@ -288,10 +287,10 @@ def get_pet_info():
             pet_dict['user_name'] = pet_user.fname
             pet_dict['user_email'] = pet_user.email
             
-            match_and_lost_pet.append(pet_dict)
+            matches_and_pet_to_look.append(pet_dict)
 
     
-    return jsonify({'msg': msg, 'match_and_lost_pet':match_and_lost_pet})
+    return jsonify({'msg': msg, 'matches_and_pet_to_look':matches_and_pet_to_look})
 
 
 @app.route("/change_pet_type.json", methods=["POST"])
@@ -306,16 +305,6 @@ def change_pet_type():
     db.session.commit()
     msg2 = f'We have changed the pet type status to "found".'
     return jsonify({'msg2': msg2})
-
-
-
-
-
-
-
-
-
-
     
 
     

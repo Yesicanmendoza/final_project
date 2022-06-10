@@ -74,14 +74,12 @@ def get_rescued_pets(animal_type):#
     return Pet.query.filter(Pet.animal_type == animal_type, Pet.pet_type=='rescued').all()
 
 
-def get_lost_dogs():
-    """Return a list of lost dogs"""
-    return Pet.query.filter(Pet.animal_type =='dog', Pet.pet_type=='lost').all()
+def get_lost_pets(animal_type):#
+    """Return a list of lost pets by animal type"""
+    return Pet.query.filter(Pet.animal_type == animal_type, Pet.pet_type=='lost').all()
 
 
-def get_lost_cats():
-    """Return a list of rescued cats"""
-    return Pet.query.filter(Pet.animal_type =='cat', Pet.pet_type=='lost').all()
+
 
 
 

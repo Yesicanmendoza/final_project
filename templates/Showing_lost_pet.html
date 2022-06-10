@@ -9,10 +9,11 @@
  
 <ul>
   {% for pet in pets %}
-    <li>
+    <li>      
       <a href="/lost_pet/{{ pet.pet_id }}">
-        {{ pet.name }}
+        {{ pet.name }}: The {{pet.pet_type}} pet.
       </a>
+      <img src={{pet.img}} alt="profile" />
     </li>
   {% endfor %}
 </ul>

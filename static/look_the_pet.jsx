@@ -132,22 +132,22 @@ fetch('/matches.json')
   let msg = Data.msg;
   console.log(msg);
   console.log(Data);
-  const matches=Data.match_and_lost_pet;
+  const matches=Data.matches_and_pet_to_look;
   console.log(matches);
   //const final_match = [];
   
   if (matches != null){
-    const lost_pet = matches.pop();
-    console.log(lost_pet);    
+    const petToLook = matches.pop();
+    console.log(petToLook);    
     console.log(matches);    
-    const center_lost_pet = {'lat':lost_pet.lat, 'lng':lost_pet.lng};
+    const centerPetToLook = {'lat':petToLook.lat, 'lng':petToLook.lng};
     
     for (const pet of matches){
       const center={};
       center['lat']=pet.lat;
       center['lng']=pet.lng;
       //console.log(center);
-      const distance = getDistance(center_lost_pet, center);
+      const distance = getDistance(centerPetToLook, center);
       console.log(distance);
       
       if (distance <= 35){

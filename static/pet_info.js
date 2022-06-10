@@ -58,4 +58,4 @@ geocoder.geocode({ address: location }, (results, status) => {
   }); 
 };
 
-document.querySelector('#pet_reg_field').addEventListener('submit', registerPet);
+document.querySelector('#pet_reg_field form').addEventListener('submit', registerPet);
