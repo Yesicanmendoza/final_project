@@ -100,6 +100,12 @@ def user_login():
 
     return redirect('/')
 
+#@app.route("/logout")
+#def log_out():
+#    """User can log out."""
+
+#    return redirect('/')
+
 
 @app.route("/register_a_pet")
 def pet_register_form():
@@ -108,18 +114,26 @@ def pet_register_form():
     return render_template('Pet_registration.html')
 
 
+@app.route("/show_reg_form")
+def show_reg_form():
+    """show the for if the user has logged in."""
+    user_id = session.get("user_id")
+    
+    msg = ''
+    if user_id is None:
+        msg ='Please log in.'
+
+    return jsonify({'msg': msg})
+
 
 
 @app.route("/pet_registration.json", methods=["POST"])
 def register_pet():
     """Create a new pet."""
-    user_id = session.get("user_id")
-    
-    if user_id is None:
-        msg ='Please log in.'
-          
+    user_id = session.get("user_id")  
+   
 
-    else:
+    if user_id:
         
         name = request.json.get('name').title() #Can be None
         animal_type=request.json.get('animal_type')

@@ -2,66 +2,68 @@
 {% block title %}Pet registration{% endblock %}
 
 {% block body %}
+  <p class="register_pet"></p>
+  <div id="register_pet">
+    <h1>Register your pet</h1>
 
-  <h1>Register your pet</h1>
+      <h2>STEP 1. Introduce your pet information</h2>
 
-    <h2>STEP 1. Introduce your pet information</h2>
-
-      <section id="pet_reg_field">
-        <form action="/pet_registration" method="POST" class="pet_reg_field">
-          <p>
-            Enter the pet's name, if you don't know it just conitnue to the next line:<input type="text" name="name" id="name_field">
-          </p>
-          <p>
-            <label>Select the animal type of your pet: 
-              <select id="animal_type_field" >
-                <option   name='dog' value= 'dog' >Dog</option>
-                <option   name='cat' value= 'cat' >Cat</option>
-              </select>
-            </label>
-          </p>
-            <label>Choose if your pet is a lost o rescued one: 
-              <select id="pet_type_field" >
-                <option   name='lost' value= 'lost' >Lost pet</option>
-                <option   name='rescued' value= 'rescued' >Rescued pet</option>
-              </select>
-            </label>
-          <p>
-            <label>What is your pet's gender? 
-              <select id="gender_field" >
-                <option   name='male' value= 'male' >Male</option>
-                <option   name='female' value= 'female' >Female</option>
-              </select>
-            </label>            
-          </p>
-          <p>
-            Breed: <input type="text" name="breed" id="breed_field">
-          </p>
-          <p>
-            Color: <input type="text" name="color" id="color_field">
-          </p>
-          <p>
-            Address of the location where you lost or found the pet: 
-            <div><input type="text" name="location" id="location_field">></div>
-          </p>
-          <p>
-            Date when you lost or found the pet(m-d-y): <input type="text" name="date" id="date_field">>
-          </p>
-          <section class="map">
-            <div id="map"></div>
-          </section>
-        
-          <p>
-            <input type="submit">
-          </p>   
-        </form>
-    </section>
+        <section id="pet_reg_field">
+          <form action="/pet_registration" method="POST" class="pet_reg_field">
+            <p>
+              Enter the pet's name, if you don't know it just conitnue to the next line:<input type="text" name="name" id="name_field">
+            </p>
+            <p>
+              <label>Select the animal type of your pet: 
+                <select id="animal_type_field" >
+                  <option   name='dog' value= 'dog' >Dog</option>
+                  <option   name='cat' value= 'cat' >Cat</option>
+                </select>
+              </label>
+            </p>
+              <label>Choose if your pet is a lost o rescued one: 
+                <select id="pet_type_field" >
+                  <option   name='lost' value= 'lost' >Lost pet</option>
+                  <option   name='rescued' value= 'rescued' >Rescued pet</option>
+                </select>
+              </label>
+            <p>
+              <label>What is your pet's gender? 
+                <select id="gender_field" >
+                  <option   name='male' value= 'male' >Male</option>
+                  <option   name='female' value= 'female' >Female</option>
+                </select>
+              </label>            
+            </p>
+            <p>
+              Breed: <input type="text" name="breed" id="breed_field">
+            </p>
+            <p>
+              Color: <input type="text" name="color" id="color_field">
+            </p>
+            <p>
+              Address of the location where you lost or found the pet: 
+              <div><input type="text" name="location" id="location_field">></div>
+            </p>
+            <p>
+              Date when you lost or found the pet(m-d-y): <input type="text" name="date" id="date_field">>
+            </p>
+            <section class="map">
+              <div id="map"></div>
+            </section>
+          
+            <p>
+              <input type="submit">
+            </p>   
+          </form>
+      </section>  
+  </div>
 
     <div>
       <p id="message"></p>   
     </div>
 
-  <div>
+  <div id="register_pet_2">
     <h2>STEP 2. Add an image about your pet</h2>
     <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
       Please upload a photo about your pet.
