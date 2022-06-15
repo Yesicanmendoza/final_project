@@ -50,7 +50,7 @@ function AskIfPetWasFound() {
   return ( 
         <section id="found_pet"> 
           <form className="found_pet">
-            <h2>Did you found your pet? </h2>
+            <h2>Did you find your pet? </h2>
               <label>
                 If you found your pet, please select the pet's id we should remove from the database: 
               <select id="match_pet_id" name="match_pet_id">

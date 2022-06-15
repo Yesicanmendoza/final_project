@@ -192,8 +192,7 @@ def get_url_img():
                                         api_secret=CLOUDINARY_SECRET, 
                                         cloud_name=CLOUD_NAME)
     
-    img=result['secure_url']
-    print(img)    
+    img=result['secure_url']     
     if new_pet_id == None:
         flash("Please fill up the pet's information first")
     else:
@@ -242,6 +241,19 @@ def get_pet_information():
                             fname=fname, pets=pets_to_look)
 
 
+
+@app.route('/lost_pet/<pet_id>/found')
+def update_pet_type(pet_id):
+    """Change the status of the selected pet"""
+    pet = crud.get_pet_by_id(pet_id)
+    pet.pet_type = 'found'
+    db.session.commit()
+    flash('We have changed the pet´s status to "found".')
+    return redirect('/')
+
+
+
+
 @app.route('/lost_pet/<pet_id>/')
 def show_list_matches(pet_id):
     """Show list of matches."""
@@ -263,12 +275,48 @@ def get_pet_info():
     elif pet_type=="rescued":
         pet_list=crud.get_lost_pets(animal_type)   
     
+
+    
     matches = []
     for pet in pet_list:
         if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:
-            if pet_to_look.breed in pet.breed:
-                if pet_to_look.color in pet.color:
-                    matches.append(pet)            
+            
+            
+            if ',' in pet.breed:
+                pet.breed=pet.breed.split(',')
+            elif ' ' in pet.breed:
+                pet.breed=pet.breed.split(' ')
+            
+            
+            if ',' in pet_to_look.breed:
+                pet_to_look.breed=pet_to_look.breed.split(',')
+            elif ' ' in pet_to_look.breed:
+                pet_to_look.breed=pet_to_look.breed.split(' ')
+
+            breed = False
+            for word in pet.breed:
+                if word in pet_to_look.breed:
+                    breed = True
+                    break
+            
+            if ',' in pet.color:
+                pet.color=pet.color.split(',')
+            elif ' ' in pet.color:
+                pet.color=pet.color.split(' ')
+            
+            if ',' in pet_to_look.color:
+                pet_to_look.color=pet_to_look.color.split(',')
+            elif ' ' in pet_to_look.color:
+                pet_to_look.color=pet_to_look.color.split(' ')
+
+            color = False
+            for word in pet.color:
+                if word in pet_to_look.color:
+                    color = True
+                    break
+            
+            if breed==True and color==True:
+                matches.append(pet)            
     
 
     matches_and_pet_to_look = []
