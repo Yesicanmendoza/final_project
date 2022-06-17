@@ -130,16 +130,15 @@ fetch('/matches.json')
 .then(response => response.json())
 .then(Data => {  
   let msg = Data.msg;
-  console.log(msg);
-  console.log(Data);
+  //console.log(msg);
+  //console.log(Data);
   const matches=Data.matches_and_pet_to_look;
-  console.log(matches);
-  //const final_match = [];
-  
+  //console.log(matches);
+    
   if (matches != null){
     const petToLook = matches.pop();
-    console.log(petToLook);    
-    console.log(matches);    
+    //console.log(petToLook);    
+    //console.log(matches);    
     const centerPetToLook = {'lat':petToLook.lat, 'lng':petToLook.lng};
     
     for (const pet of matches){
@@ -148,15 +147,15 @@ fetch('/matches.json')
       center['lng']=pet.lng;
       //console.log(center);
       const distance = getDistance(centerPetToLook, center);
-      console.log(distance);
+      //console.log(distance);
       
       if (distance <= 35){
         pet_id_matches.push(pet.pet_id);
         final_match.push(pet);
       };          
     };  
-    console.log(final_match);
-    console.log(pet_id_matches);
+    //console.log(final_match);
+    //console.log(pet_id_matches);
 
     if (final_match === []){
       msg = 'There are not matches around 30 miles';

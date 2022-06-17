@@ -1,4 +1,4 @@
-"""Server for movie ratings app."""
+"""Server"""
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify, url_for)
@@ -205,7 +205,7 @@ def get_url_img():
         db.session.commit()
         flash("Your pet has successfully been registrated.")
 
-    return redirect("/")
+    return redirect("/look_for_pet")
 
 
 
@@ -308,9 +308,7 @@ def get_pet_info():
                 pet_look_breed_lst.extend(pet_to_look_breed)
             else:
                 pet_look_breed_lst.append(pet_to_look_breed)
-            print(pet_breed_lst)
-            print(pet_look_breed_lst)
-
+            
             breed = False
             if len(pet_breed_lst) > 1:
                 for word in pet_breed_lst:
@@ -328,7 +326,7 @@ def get_pet_info():
                 pet_color=pet.color.split(',')
             elif ' ' in pet.color:
                 pet_color=pet.color.split(' ')            
-            print(pet_color) 
+            
 
             if type(pet_color)==type(pet_color_lst):        
                 pet_color_lst.extend(pet_color) 
@@ -342,9 +340,8 @@ def get_pet_info():
                 pet_to_look_color=pet_to_look.color.split(',')
             elif ' ' in pet_to_look.color:
                 pet_to_look_color=pet_to_look.color.split(' ') 
-
+                        
             
-            print(type(pet_to_look_color))
             if type(pet_to_look_color)== type(pet_look_color_lst):
                 pet_look_color_lst.extend(pet_to_look_color)
             else:
@@ -377,7 +374,7 @@ def get_pet_info():
         matches.append(pet_to_look)
        
         
-        #Changing the pets ogject, for a dictionary
+        #Changing the pets object, for a dictionary
         for pet in matches:
             pet_dict = {}
             pet_dict['pet_id'] = pet.pet_id

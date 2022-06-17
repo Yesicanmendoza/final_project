@@ -2,13 +2,18 @@
 {% block title %}Look for your pet{% endblock %}
 
 {% block body %}
-  <h1>Let's look for your pet</h1>
-  <div>
-    <p id="message">{{msg}}</p>
-  </div>
+  {% if msg == 'Please log in.' %}
+    <div>
+      <p id="message">{{msg}}</p>
+    </div>
+  {% endif %}
 
   {% if msg != 'Please log in.' %}
     <ul>
+      <h1>Let's look for your pet</h1>
+      <div>
+        <p id="message">{{msg}}</p>
+      </div>
       {% for pet in pets %}
         <li>      
           <a href="/lost_pet/{{ pet.pet_id }}">
@@ -37,9 +42,9 @@
       </ul>
 
     {% endif %}    
-
+    <a href='/'>Return to the homepage.</a>
   {% endif %} 
   
-  <a href='/'>Return to the hompage.</a>
+  
 
 {% endblock %}
