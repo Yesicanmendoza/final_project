@@ -9,6 +9,7 @@ from jinja2 import StrictUndefined
 
 from datetime import date
 from datetime import datetime
+from copy import copy
 from werkzeug.security import check_password_hash as checkph
 from werkzeug.security import generate_password_hash as genph
 
@@ -100,11 +101,14 @@ def user_login():
 
     return redirect('/')
 
-#@app.route("/logout")
-#def log_out():
-#    """User can log out."""
 
-#    return redirect('/')
+@app.route("/logout", methods=['POST'])
+def log_out():
+    """User can log out."""
+    session['user_id']= None
+    session['user_fname']= None
+
+    return redirect('/')
 
 
 @app.route("/register_a_pet")
@@ -135,7 +139,7 @@ def register_pet():
 
     if user_id:
         
-        name = request.json.get('name').title() #Can be None
+        name = request.json.get('name').title() 
         animal_type=request.json.get('animal_type')
         pet_type=request.json.get('pet_type')
         gender=request.json.get('gender').lower()
@@ -228,7 +232,7 @@ def get_pet_information():
 
 
         if len(pets_to_look)== 0:
-            msg = f"{fname}, you do not have pets to look for"
+            msg = f"{fname}, you do not have pets to look for."
         else:            
             if len(pets_to_look)==1:
                 msg = f"{fname}, click in your pet's name to look for a match."
@@ -281,39 +285,82 @@ def get_pet_info():
     for pet in pet_list:
         if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:
             
-            
+            pet_breed_lst=[]
+            pet_breed = copy(pet.breed)
+            #it is a match if one word in breed matches
             if ',' in pet.breed:
-                pet.breed=pet.breed.split(',')
+                pet_breed=pet.breed.split(',')
             elif ' ' in pet.breed:
-                pet.breed=pet.breed.split(' ')
+                pet_breed=pet.breed.split(' ')             
+            if type(pet_breed) == type(pet_breed_lst):
+                pet_breed_lst.extend(pet_breed)
+            else:
+                pet_breed_lst.append(pet_breed)            
             
             
+            pet_look_breed_lst=[]
+            pet_to_look_breed = copy(pet_to_look.breed)
             if ',' in pet_to_look.breed:
-                pet_to_look.breed=pet_to_look.breed.split(',')
+                pet_to_look_breed=pet_to_look.breed.split(',')
             elif ' ' in pet_to_look.breed:
-                pet_to_look.breed=pet_to_look.breed.split(' ')
+                pet_to_look_breed=pet_to_look.breed.split(' ')
+            if type(pet_to_look_breed)==type(pet_look_breed_lst):        
+                pet_look_breed_lst.extend(pet_to_look_breed)
+            else:
+                pet_look_breed_lst.append(pet_to_look_breed)
+            print(pet_breed_lst)
+            print(pet_look_breed_lst)
 
             breed = False
-            for word in pet.breed:
-                if word in pet_to_look.breed:
+            if len(pet_breed_lst) > 1:
+                for word in pet_breed_lst:
+                    if word in pet_look_breed_lst:
+                        breed = True                        
+                        break
+            else:
+                if pet_breed_lst[0] in pet_look_breed_lst:
                     breed = True
-                    break
-            
-            if ',' in pet.color:
-                pet.color=pet.color.split(',')
-            elif ' ' in pet.color:
-                pet.color=pet.color.split(' ')
-            
-            if ',' in pet_to_look.color:
-                pet_to_look.color=pet_to_look.color.split(',')
-            elif ' ' in pet_to_look.color:
-                pet_to_look.color=pet_to_look.color.split(' ')
 
+            #it is a match if one word in color matches
+            pet_color_lst=[]
+            pet_color = copy(pet.color)
+            if ',' in pet.color:
+                pet_color=pet.color.split(',')
+            elif ' ' in pet.color:
+                pet_color=pet.color.split(' ')            
+            print(pet_color) 
+
+            if type(pet_color)==type(pet_color_lst):        
+                pet_color_lst.extend(pet_color) 
+            else:
+                pet_color_lst.append(pet_color)           
+            
+            
+            pet_look_color_lst=[]
+            pet_to_look_color=copy(pet_to_look.color)
+            if ',' in pet_to_look.color:
+                pet_to_look_color=pet_to_look.color.split(',')
+            elif ' ' in pet_to_look.color:
+                pet_to_look_color=pet_to_look.color.split(' ') 
+
+            
+            print(type(pet_to_look_color))
+            if type(pet_to_look_color)== type(pet_look_color_lst):
+                pet_look_color_lst.extend(pet_to_look_color)
+            else:
+                pet_look_color_lst.append(pet_to_look_color)           
+            
             color = False
-            for word in pet.color:
-                if word in pet_to_look.color:
+            if len(pet_color_lst) >1:
+                for word in pet_color_lst:
+                    if word in pet_look_color_lst:
+                        color = True
+                        print(word)
+                        print(color)
+                        break
+            else:
+                if pet_color_lst[0] in pet_look_color_lst:
                     color = True
-                    break
             
             if breed==True and color==True:
                 matches.append(pet)            
