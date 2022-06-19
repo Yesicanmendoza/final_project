@@ -15,11 +15,13 @@
         <p id="message">{{msg}}</p>
       </div>
       {% for pet in pets %}
-        <li>      
-          <a href="/lost_pet/{{ pet.pet_id }}">
-            {{ pet.name }}: The {{pet.pet_type}} pet.
-          </a>
-          <img src={{pet.img}} alt="profile" />
+        <li>
+          <div>      
+            <a href="/lost_pet/{{ pet.pet_id }}">
+              {{ pet.name }}: The {{pet.pet_type}} pet.
+            </a>
+            <img src={{pet.img}} alt="profile" />
+          </div>
         </li>
       {% endfor %}
     </ul>
@@ -32,11 +34,13 @@
       
       <ul>
         {% for pet in pets %}
-          <li>      
-            <a href="/lost_pet/{{ pet.pet_id }}/found">
-              {{ pet.name }}
-            </a>
-            <img src={{pet.img}} alt="profile" />
+          <li>
+            <div>    
+              <a href="/lost_pet/{{ pet.pet_id }}/found">
+                {{ pet.name }}
+              </a>
+              <img src={{pet.img}} alt="profile" />
+            </div> 
           </li>
         {% endfor %}
       </ul>

@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
-{% block title %}Find your pet{% endblock %}
+{% block title %}Welcome!{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
+  <h1>The spots of your pet never change.</h1>
+    <div>
+      <h3>How does this web site work?</h3>    
+          <p>
+          <ul>
+            <li>We only work with dogs and cats.</li>
+            <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
+            <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
+            <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
+            <li>The search criteria are based on the following characteristics:</li>
+              <ul>
+                <li>Breed:The list of matches is going to show you the pets with at least "one" word in commun.</li>
+                <li>Color: Same thing than breed.</li>
+                <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
+              </ul>
+            <li>Once the you get a match (or macthes), you will be able to email the rescuer or the owner.</li> 
+            <li>If you found the pet that you were looking for, submit its pet's id, so we can change its status.</li>  
+          </ul>
+          </p>
+    </div>
+    <img src='/static/img/doggie-kittens.PNG' id="homepageimg" />
+    <div>
+
+    </div>
   
     <h2>Create an Account</h2>
     <form action="/users" method="POST">
@@ -51,22 +74,9 @@
       <li><a href='/look_for_pet'>Look for a pet.</a></li>
     </ul>
 
-    <h3>How does this web site work?</h3>
-    <p>
-      <ul>
-        <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
-        <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
-        <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
-        <li>The search criteria are based on the following characteristics:</li>
-          <ul>
-            <li>Breed:The list of matches is going to show you the pets with at least "one" word in commun.</li>
-            <li>Color: Same thing than breed.</li>
-            <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
-          </ul>
-        <li>Once the you get a match (or macthes), you will be able to email the rescuer.</li> 
-        <li>If you found the pet that you were looking for, submit its pet's id, so we can change its status.</li>  
-      </ul>
-    </p>
+    
+  
+
     <h3>I have lost my pet, what should I do?</h3>
     <p>
       <ul>We sugest the next steps:
@@ -77,6 +87,7 @@
         <li>If you found a match that can be your pet, contact the rescuer.</li>   
       </ul>
     </p>
+  
 
     <h3>I have rescued a pet, what should I do?</h3>
     <p>

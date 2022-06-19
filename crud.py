@@ -15,10 +15,10 @@ def create_user(fname, lname, email, password, created_at):#
     return user
 
 
-def get_users():
-    """Return all users."""
+#def get_users():
+#    """Return all users."""
 
-    return User.query.all()
+#    return User.query.all()
 
 
 def get_user_by_id(user_id): #
@@ -58,10 +58,10 @@ def create_pet(user_id, name, animal_type, pet_type,
     return pet
 
 
-def get_pets():
-    """Return all pets."""
+#def get_pets():
+#    """Return all pets."""
 
-    return Pet.query.all()
+#    return Pet.query.all()
 
 
 def get_pet_by_id(pet_id):#

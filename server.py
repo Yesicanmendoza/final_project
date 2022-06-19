@@ -175,7 +175,9 @@ def register_pet():
               
             else:
                 date=datetime.strptime(string_date, "%m-%d-%y")
-                img="/static/Noimage.PNG"
+                img="/static/img/Noimage.PNG"
+                if animal_type == 'cat':
+                    img="/static/img/CAT.png"
                 pet = crud.create_pet(user_id, name, animal_type, pet_type, 
                     gender, breed, color, location, lat, lng, date, img)
                 db.session.add(pet)
