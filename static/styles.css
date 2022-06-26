@@ -1,63 +1,89 @@
+#map {
+  display: none;
+}
+
+
+
 body {  
   background-color: #e9edc9;
-  margin:30px;  
+  margin:10px;
+  font-family: 'Font Zone 108', serif;
+  font-style: italic; 
+  font-size: 18px   
 }
 
 h1 {
   text-align: center;
-  background-color: #d4a373;
-  color: #a44a3f;  
+  background-color:#d4a373;
+  color: #a44a3f;
+  font-weight: bold;
+  font-size: 60px;  
 }
 
-#homepageimg {
-  height: 449px;
-  width: 550px;
-  border: 2px solid brown; 
-  margin-left: 150px;
-  margin-top: 10px; 
-  vertical-align: top;
-}
 p {
   margin-top: 0;
   margin-bottom: 1rem;
   margin: initil;
 }
 
-#location_field {
-    
-    height: 100px;
-    width: 500px;
-    
+img {
+  height: 200px;
+  width: 200px;
+  border: 2px solid brown;
 }
 
-img {
-    height: 200px;
-    width: 200px;
-    border: 2px solid brown;
-   
-  }
-  
-  
-  
-  div {
- 
-    display: inline-block;
-    padding: 10px;
-    margin: initil;
-    width: 40%;    
+div {
+  display: inline-block;      
+  vertical-align: top;
+  text-align: justify;
+  margin-top: 20px;
+  margin-left: 20px;
+}
 
+#navigation {
+  background: #333 url('/static/img/cats-dogs.png');
+  background-size: cover;
+  height: 300px;
+  width: 57%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 55px;
+  text-align: center;
+  border: 2px solid brown;
+  
+}
+  
+  #signup, #logout, #login  { 
+    text-align: center;  
+    margin-top: 10px;  
+    vertical-align: top;
+    margin-left: 0px;
+  }
+
+  #app_exp {
+    background-color: whitesmoke;
+  }
+
+  #location_field {    
+    height: 100px;
+    width: 500px;    
   }
 
   #matches { 
     display: inline-block;
     padding: 10px;
-    margin: initil; 
+    margin: initil;  
+    margin-right: 100px; 
+    width: 200%;
   }
 
-  #map {
-    display: none;
+
+  input[type='submit'] {
+    border: 1px solid black;
+    border-radius: 0;
+    box-shadow: 2px 2px 0 black;
+    background: #a44a3f;    
   }
-
-
 
  

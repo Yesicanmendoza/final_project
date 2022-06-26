@@ -6,9 +6,9 @@ function MatchInfo(props) {
       <p>Breed: {props.breed} </p>
       <p>Gender: {props.gender} </p>
       <p>Color: {props.color} </p>
-      <p>Address where the pet was found: {props.location}</p>
-      <p>Rescuer's name: {props.user_name}</p>
-      <p>Rescuer's email: {props.user_email}</p>
+      <p>Address where the pet was lost\found: {props.location}</p>
+      <p>Rescuer\Owner's name: {props.user_name}</p>
+      <p>Rescuer\Owner's's email: {props.user_email}</p>
       <img src={props.img} alt="profile" />
     </div>
   );

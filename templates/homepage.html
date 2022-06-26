@@ -2,112 +2,133 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-  <h1>The spots of your pet never change.</h1>
-    <div>
-      <h3>How does this web site work?</h3>    
+<h1>The spots of your dog never change</h1>
+  <div class="container"> 
+    <div class="row">
+      <div class="col-sm-12 col-md-4" id="signup">
+        <h2>Create an Account</h2>
+        <form action="/users" method="POST">
           <p>
-          <ul>
-            <li>We only work with dogs and cats.</li>
-            <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
-            <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
-            <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
-            <li>The search criteria are based on the following characteristics:</li>
-              <ul>
-                <li>Breed:The list of matches is going to show you the pets with at least "one" word in commun.</li>
-                <li>Color: Same thing than breed.</li>
-                <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
-              </ul>
-            <li>Once the you get a match (or macthes), you will be able to email the rescuer or the owner.</li> 
-            <li>If you found the pet that you were looking for, submit its pet's id, so we can change its status.</li>  
-          </ul>
+            <input type="text" name="fname" placeholder="First name">
           </p>
-    </div>
-    <img src='/static/img/doggie-kittens.PNG' id="homepageimg" />
-    <div>
+          <p>
+            <input type="text" name="lname" placeholder="Last name">
+          </p>
+          <p>
+            <input type="text" name="email" placeholder="Email">
+          </p>
+          <p>
+            <input type="password" name="password" placeholder="Password">
+          </p>
+          <p>
+            <input type="submit">
+          </p>
+        </form>     
+      </div>
 
-    </div>
   
-    <h2>Create an Account</h2>
-    <form action="/users" method="POST">
-      <p>
-        First name<input type="text" name="fname">
-      </p>
-      <p>
-        Last name<input type="text" name="lname">
-      </p>
-      <p>
-        Email <input type="text" name="email">
-      </p>
-      <p>
-        Password <input type="password" name="password">
-      </p>
-      <p>
-        <input type="submit">
-      </p>
-    </form>
+      <div class="col-sm-12 col-md-4" id="login">
+        <h2>Log In</h2>
+        <form action="/login" method="POST">
+          <p>
+            <input type="text" name="email" placeholder="Email">
+          </p>
+          <p>
+            <input type="password" name="password" placeholder="Password">
+          </p>
+          <p>
+            <input type="submit">
+          </p>
+        </form>
+      </div>
 
-    <h2>Log In</h2>
-    <form action="/login" method="POST">
-      <p>
-        Email <input type="text" name="email">
-      </p>
+      <div class="col-sm-12 col-md-4" id="logout">
+        <h2>Log Out</h2>
+        <form action="/logout" method="POST">
+          <p>
+            <input type="submit">
+          </p>
+        </form>
+      </div>
+    </div>
+  </div> 
 
-      <p>
-        Password <input type="password" name="password">
-      </p>
-
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-
-    <h2>Log Out</h2>
-    <form action="/logout" method="POST">
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-
+  <div id="navigation">
     <h2>Navigation</h2>
     <ul>
       <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
       <li><a href='/look_for_pet'>Look for a pet.</a></li>
     </ul>
+  </div>
+ 
+  <section class="full-columns">
+    <section class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 text-center">
+          <p class="lead welcome">
+            <h1>Let us help you to find your pet</h1>        
+          </p>
+        </div>
+      </div>
+    </section>
+  </section>
 
     
-  
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 app_exp" id="app_exp">        
+            <p>
+              <h3>How does this aplication work?</h3>   
+              <ul>
+                <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
+                <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
+                <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
+                <li>The search criteria are based on the following characteristics:</li>
+                  <ul>
+                    <li>Breed:The list of matches is going to show you the pets with at least "one" word in commun.</li>
+                    <li>Color: Same thing than breed.</li>
+                    <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
+                  </ul>
+                <li>Once the you get a match (or macthes), you will be able to email the rescuer or the owner.</li> 
+                <li>If you found the pet that you were looking for, submit its pet's id, so we can change its status.</li>  
+              </ul>
+            </p>
+          </div>
+            
+        
+          <div class="col-sm-12 col-md-7">     
+            <p>
+              <h3>I have lost my pet, what should I do?</h3>
+              <ul>We sugest the next steps:
+                <li>Check local shelters' websites every 1-3 days  for new arrivals.</li>
+                <li>Check and post to the many lost pet facebook pages for your area.</li>
+                <li>If your dog has a microchip, contact your microchip company and ensure your phone number is updated in their system.</li>
+                <li>Create a user on this website to check for matches every 1-3 days.</li>
+                <li>If you found a match that can be your pet, contact the rescuer.</li>   
+              </ul>
+            </p>
 
-    <h3>I have lost my pet, what should I do?</h3>
-    <p>
-      <ul>We sugest the next steps:
-        <li>Check local shelters' websites every 1-3 days  for new arrivals.</li>
-        <li>Check and post to the many lost pet facebook pages for your area.</li>
-        <li>If your dog has a microchip, contact your microchip company and ensure your phone number is updated in their system.</li>
-        <li>Create a user on this website to check for matches every 1-3 days.</li>
-        <li>If you found a match that can be your pet, contact the rescuer.</li>   
-      </ul>
-    </p>
-  
-
-    <h3>I have rescued a pet, what should I do?</h3>
-    <p>
-      <ul>
-        <li>If you found a lost pet, the best thing that you can do is hold onto the dog and look for the owner.</li>
-        <li>If the rescued pet is wearing a tag with the phone numer, call and send text.</li>
-        <li>Take the pet to a shelter or veterinarian to scan for a microchip. Ask for the microchip number and search it on the <a href="https://www.aaha.org/your-pet/pet-microchip-lookup/microchip-search/">Microchip look-up website.</a> </li>
-        <li>If you are not able to keep the pet, you can contact your local shelter.</li>
-        <li>Check  to the many lost pet facebook pages for your area.</li>
-        <li>Create a user on this website to check for matches every 1-3 days.</li>
-        <li>If you found a match that can be your pet, contact the owner.</li>   
-      </ul>
-
-      <div>
-        WHAT YOU NEED TO KNOW
-        <p>
-          Pets are considered to be the legal property of their owners. Finding a pet does not entitle the finder to keep, sell, or give away the pet, nor does it convey ownership to the finder. If you find a pet, you must actively look for the owner for at least 90 days.  Even after that period of time has elapsed, the owner may still have the right to reclaim his/her pet under certain circumstances.
-          According to California Penal Code 485, a person who finds lost property without first making reasonable and just efforts to find the owner and to restore property to the owner may be guilty of theft.  It is important to report the found pet to the animal control agency servicing the area where the pet was found and to follow your jurisdiction's policies and procedures regarding stray animals.
-        </p>
+            <p>
+              <h3>I have rescued a pet, what should I do?</h3>
+              <ul>
+                <li>If you found a lost pet, the best thing that you can do is hold onto the dog and look for the owner.</li>
+                <li>If the rescued pet is wearing a tag with the phone numer, call and send text.</li>
+                <li>Take the pet to a shelter or veterinarian to scan for a microchip. Ask for the microchip number and search it on the <a href="https://www.aaha.org/your-pet/pet-microchip-lookup/microchip-search/">Microchip look-up website.</a> </li>
+                <li>If you are not able to keep the pet, you can contact your local shelter.</li>
+                <li>Check  to the many lost pet facebook pages for your area.</li>
+                <li>Create a user on this website to check for matches every 1-3 days.</li>
+                <li>If you found a match that can be your pet, contact the owner.</li>   
+              </ul>
+            </p>
+            <p>
+              WHAT YOU NEED TO KNOW:
+              Pets are considered to be the legal property of their owners. Finding a pet does not entitle the finder to keep, sell, or give away the pet, nor does it convey ownership to the finder. If you find a pet, you must actively look for the owner for at least 90 days.  Even after that period of time has elapsed, the owner may still have the right to reclaim his/her pet under certain circumstances.
+              According to California Penal Code 485, a person who finds lost property without first making reasonable and just efforts to find the owner and to restore property to the owner may be guilty of theft.  It is important to report the found pet to the animal control agency servicing the area where the pet was found and to follow your jurisdiction's policies and procedures regarding stray animals.
+            </p>  
+          </div>
+        </div>
       </div>
-    </p> 
+    
   
+    
 {% endblock %}

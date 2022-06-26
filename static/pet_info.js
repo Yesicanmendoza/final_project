@@ -36,8 +36,8 @@ fetch("/show_reg_form")
     const msg=jsonData.msg;
     if (msg==='Please log in.'){
       document.querySelector('.register_pet').innerHTML = msg;
-      document.querySelector('#register_pet').style.display = "none";
-      document.querySelector('#register_pet_2').style.display = "none";
+      document.querySelector('#register_pet').style.display = "none"; 
+      document.querySelector('#register_pet_2').style.display = "none";    
     }
   });
 
@@ -70,3 +70,14 @@ geocoder.geocode({ address: location }, (results, status) => {
 };
 
 document.querySelector('#pet_reg_field form').addEventListener('submit', registerPet);
+
+
+
+//fetch("/show_reg_form_2")
+ // .then(response => response.json())
+  //.then(jsonData=> {
+   // const new_pet_id=jsonData.new_pet_id;
+   // if (new_pet_id != null){    
+   //   document.querySelector('#register_pet_2').style.display = "block";
+   //}
+  //});

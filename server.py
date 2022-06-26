@@ -113,14 +113,13 @@ def log_out():
 
 @app.route("/register_a_pet")
 def pet_register_form():
-    """Show register pet form."""
-
+    """Show register pet form."""    
     return render_template('Pet_registration.html')
 
 
 @app.route("/show_reg_form")
 def show_reg_form():
-    """show the for if the user has logged in."""
+    """show the form if the user has logged in."""
     user_id = session.get("user_id")
     
     msg = ''
@@ -152,29 +151,34 @@ def register_pet():
         lng=request.json.get('lng')
         
         #Validation of pet info
+        info_completed = False
+
         if name =='':
             name="Unknown"
 
         if lat == '':
-            msg = "Please introduce a valid address"
-        
+            msg = "Please enter a valid address"          
         else:            
             pet_info = [animal_type, pet_type, 
                     gender, breed, color, location, 
                     lat, lng, string_date]
     
             for data in pet_info:
-                if data == '' or data == None:
-                    info_completed = False
+                if data == '' or data == None:                    
+                    msg ="Please enter all the information."
                     break
                 else:
-                    info_completed = True
+                    try:
+                        date=datetime.strptime(string_date, "%m-%d-%y")
+                    except ValueError:
+                        msg = "Please enter a valid date"
+                    else:
+                        if date > date.today():
+                            msg = "Please enter a valid date"
+                        else:
+                            info_completed = True
 
-            if info_completed == False:
-                msg =f"Please fill up all information spaces."
-              
-            else:
-                date=datetime.strptime(string_date, "%m-%d-%y")
+            if info_completed == True:               
                 img="/static/img/Noimage.PNG"
                 if animal_type == 'cat':
                     img="/static/img/CAT.png"
@@ -184,29 +188,46 @@ def register_pet():
                 db.session.commit()
                 msg = "Information saved, please continue with the step two."
                 session['new_pet_id']=pet.pet_id
+                new_pet_id = session.get('new_pet_id')
     return jsonify({'msg': msg})
+
+
+#@app.route("/show_reg_form_2")
+#def show_reg_form_2():
+ #   """show the form if the registration has started"""
+  #  new_pet_id = session.get("new_pet_id")  
+
+   # return jsonify({'new_pet_id':new_pet_id})
 
 
 @app.route("/register_a_pet/pet_image", methods=['POST'])
 def get_url_img():
     """Get the image of the pet."""
-    new_pet_id=session.get('new_pet_id')
+    new_pet_id = session.get('new_pet_id')
 
-    my_file = request.files["img"]
-    result =  cloudinary.uploader.upload(my_file, 
-                                        api_key=CLOUDINARY_KEY, 
-                                        api_secret=CLOUDINARY_SECRET, 
-                                        cloud_name=CLOUD_NAME)
-    
-    img=result['secure_url']     
     if new_pet_id == None:
-        flash("Please fill up the pet's information first")
-    else:
+        flash("Please enter pet's information first")
+        return redirect("/register_a_pet")
+
+    else:   
+           
+        my_file = request.files["img"]
+        if not my_file:
+            flash("Please upload an image. DON'T DO THE REGISTRATION AGAIN")
+            return redirect("/register_a_pet")
+
+        result =  cloudinary.uploader.upload(my_file, 
+                                                api_key=CLOUDINARY_KEY, 
+                                                api_secret=CLOUDINARY_SECRET, 
+                                                cloud_name=CLOUD_NAME)
+                
+        img=result['secure_url']   
         pet=crud.get_pet_by_id(new_pet_id)
         pet.img = img
         db.session.commit()
         flash("Your pet has successfully been registrated.")
-
+        session['new_pet_id']=None
+        
     return redirect("/look_for_pet")
 
 
@@ -215,7 +236,8 @@ def get_url_img():
 def get_pet_information():
     "Get infotmation about the pet(s) to look for"
     #Get user info    
-    user_id = session.get("user_id") 
+    user_id = session.get("user_id")
+    session['new_pet_id']=None 
     fname = 'Uknown'
     pets_to_look=[]
 
