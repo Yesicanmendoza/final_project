@@ -11,7 +11,7 @@ function sendGeocodInfo(data){
     .then(response =>  response.json())
     .then(jsonData => {
 
-      document.querySelector('#message').innerHTML = jsonData.msg;   
+      document.querySelector('.login_msg').innerHTML = jsonData.msg;   
           
     });
 }; 
@@ -35,9 +35,11 @@ fetch("/show_reg_form")
   .then(jsonData=> {
     const msg=jsonData.msg;
     if (msg==='Please log in.'){
-      document.querySelector('.register_pet').innerHTML = msg;
-      document.querySelector('#register_pet').style.display = "none"; 
-      document.querySelector('#register_pet_2').style.display = "none";    
+      document.querySelector('.login_msg').innerHTML = msg;
+      document.querySelector('.reg_form_title').style.display = "none";
+      document.querySelector('.register_pet_form').style.display = "none";
+      //document.querySelector('#register_pet').style.display = "none"; 
+      //document.querySelector('#register_pet_2').style.display = "none";    
     }
   });
 

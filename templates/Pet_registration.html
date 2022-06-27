@@ -2,12 +2,22 @@
 {% block title %}Pet registration{% endblock %}
 
 {% block body %}
-  <p class="register_pet"></p>
-  <div id="register_pet">
-    <h1>Register your pet</h1>
 
+<p class="login_msg"></p>
+<div class="container reg_form_title">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12 text-center">
+      <p class="lead">
+        <h1>Register your pet</h1>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container register_pet_form">  
+  <div class="row">
+    <div class="col-sm-12 col-md-6" id="register_pet">
       <h2>STEP 1. Introduce your pet information</h2>
-
         <section id="pet_reg_field">
           <form action="/pet_registration" method="POST" class="pet_reg_field">
             <p>
@@ -43,35 +53,33 @@
             </p>
             <p>
               Address of the location where you lost or found the pet: 
-              <div><input type="text" name="location" id="location_field">></div>
+              <div><input type="text" name="location" id="location_field"></div>
             </p>
             <p>
-              Date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">>
+              Date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">
             </p>
             <section class="map">
               <div id="map"></div>
-            </section>
-          
+            </section>        
             <p>
               <input type="submit">
             </p>   
           </form>
-      </section>  
-  </div>
-
-    <div>
-      <p id="message"></p>        
+        </section>       
     </div>
 
-  <div id="register_pet_2">
-    <p>If you don't have a picture you can start to look your pet <a href='/look_for_pet'>here.</a></p>
-    <h2>STEP 2. Add an image about your pet</h2>
-    <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
-      Please upload a photo about your pet.
-      <input type="file" name="img">
-      <input type="submit">
-    </form>
+    <div class="col-sm-12 col-md-4" id="register_pet_2">      
+      <h2>STEP 2. Add an image about your pet</h2>        
+        <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
+          Please upload a photo about your pet.
+          <input type="file" name="img">
+          <input type="submit">
+        </form>
+        <img src="/static/img/kitty-chihuahua.jpg" id="k-chihuahua"/>
+        <p>If you don't have a picture you can start to look for your pet <a href='/look_for_pet'>here.</a></p>
+    </div>
   </div>
+</div>
 
   <script src="/static/pet_info.js"></script>
   <script

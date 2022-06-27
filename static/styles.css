@@ -17,7 +17,7 @@ h1 {
   background-color:#d4a373;
   color: #a44a3f;
   font-weight: bold;
-  font-size: 60px;  
+  font-size: 50px;  
 }
 
 p {
@@ -32,12 +32,13 @@ img {
   border: 2px solid brown;
 }
 
-div {
-  display: inline-block;      
-  vertical-align: top;
-  text-align: justify;
-  margin-top: 20px;
-  margin-left: 20px;
+div {  
+  text-align: justify;  
+}
+
+.flash-msg, .login_msg {
+  color: red;
+  font-weight: bold;
 }
 
 #navigation {
@@ -58,16 +59,29 @@ div {
     text-align: center;  
     margin-top: 10px;  
     vertical-align: top;
-    margin-left: 0px;
+    
   }
 
   #app_exp {
     background-color: whitesmoke;
+    margin-right: 40px;
+
   }
 
   #location_field {    
-    height: 100px;
+    height: 50px;
     width: 500px;    
+  }
+
+  #register_pet_2 {
+    margin-left: 50px; 
+  }
+
+  #k-chihuahua {    
+    height: 300px;
+    width: 390px;
+    margin: 10px;
+    
   }
 
   #matches { 

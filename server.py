@@ -59,7 +59,7 @@ def register_user():
 
     #Verification that email is not in db and create a new User
     if info_completed == False:
-        flash("Please fill up all information spaces.")
+        flash("Please enter all the information.")
     
     else:
             if crud.get_user_by_email(email):
@@ -91,7 +91,7 @@ def user_login():
             session['user_id']= user.user_id
             session['user_fname']= user.fname
                    
-            flash('Logged in!')
+            flash('Logged in, now you can use the Navigation menu!')
 
         else:
             flash('Wrong password.')
@@ -107,6 +107,7 @@ def log_out():
     """User can log out."""
     session['user_id']= None
     session['user_fname']= None
+    flash("You have logged out")
 
     return redirect('/')
 
@@ -133,7 +134,9 @@ def show_reg_form():
 @app.route("/pet_registration.json", methods=["POST"])
 def register_pet():
     """Create a new pet."""
-    user_id = session.get("user_id")  
+    user_id = session.get("user_id")
+    msg = ""
+      
    
 
     if user_id:
@@ -157,38 +160,40 @@ def register_pet():
             name="Unknown"
 
         if lat == '':
-            msg = "Please enter a valid address"          
-        else:            
-            pet_info = [animal_type, pet_type, 
-                    gender, breed, color, location, 
-                    lat, lng, string_date]
-    
-            for data in pet_info:
-                if data == '' or data == None:                    
-                    msg ="Please enter all the information."
-                    break
-                else:
-                    try:
-                        date=datetime.strptime(string_date, "%m-%d-%y")
-                    except ValueError:
-                        msg = "Please enter a valid date"
-                    else:
-                        if date > date.today():
-                            msg = "Please enter a valid date"
-                        else:
+            msg = "Please enter a valid address" 
+
+        else: 
+            try:
+                date=datetime.strptime(string_date, "%m-%d-%y")
+
+            except ValueError:
+                msg = "Please enter a valid date"
+            
+            else:
+                if date > date.today():
+                    msg = "Please enter a valid date" 
+
+                else:   
+                    pet_info = [breed, color, location]              
+                    for data in pet_info:
+                        if data == '' or data == None:                    
+                            msg ="Please enter all the information."
+                            break
+                        else:                          
                             info_completed = True
 
-            if info_completed == True:               
-                img="/static/img/Noimage.PNG"
-                if animal_type == 'cat':
-                    img="/static/img/CAT.png"
-                pet = crud.create_pet(user_id, name, animal_type, pet_type, 
-                    gender, breed, color, location, lat, lng, date, img)
-                db.session.add(pet)
-                db.session.commit()
-                msg = "Information saved, please continue with the step two."
-                session['new_pet_id']=pet.pet_id
-                new_pet_id = session.get('new_pet_id')
+        if info_completed == True:               
+            img="/static/img/Noimage.PNG"
+            if animal_type == 'cat':
+                img="/static/img/CAT.png"
+            pet = crud.create_pet(user_id, name, animal_type, pet_type, 
+                gender, breed, color, location, lat, lng, date, img)
+            db.session.add(pet)
+            db.session.commit()
+            msg = "Information saved, please continue with the step two."
+            session['new_pet_id']=pet.pet_id
+            new_pet_id = session.get('new_pet_id')
+
     return jsonify({'msg': msg})
 
 

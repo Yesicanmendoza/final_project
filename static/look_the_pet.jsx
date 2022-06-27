@@ -68,7 +68,7 @@ function changePetType(evt) {
   evt.preventDefault();
 
   const data= {match_pet_id:document.querySelector('option[name="pet_id_match"').value,};
-  console.log(data);
+  //console.log(data);
   
   const url = '/change_pet_type.json'; 
   fetch(url, {  
@@ -122,10 +122,6 @@ function getDistance(center_from, center_to){
 };
 
 
-
-
-
-
 fetch('/matches.json')
 .then(response => response.json())
 .then(Data => {  
@@ -149,7 +145,7 @@ fetch('/matches.json')
       const distance = getDistance(centerPetToLook, center);
       //console.log(distance);
       
-      if (distance <= 35){
+      if (distance <= 30){
         pet_id_matches.push(pet.pet_id);
         final_match.push(pet);
       };          
