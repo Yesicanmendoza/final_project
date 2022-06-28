@@ -57,7 +57,7 @@ const data= {
   date:document.querySelector('#date_field').value, 
   location,
 };
-
+console.log(data);
 const geocoder = new google.maps.Geocoder();
 geocoder.geocode({ address: location }, (results, status) => {
   if (status === 'OK') {

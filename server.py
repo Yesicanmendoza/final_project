@@ -135,10 +135,8 @@ def show_reg_form():
 def register_pet():
     """Create a new pet."""
     user_id = session.get("user_id")
-    msg = ""
-      
+    msg = ""    
    
-
     if user_id:
         
         name = request.json.get('name').title() 
@@ -159,33 +157,46 @@ def register_pet():
         if name =='':
             name="Unknown"
 
+        #Address validation
+        
         if lat == '':
-            msg = "Please enter a valid address" 
+           address_val = None
+        else:
+            address_val = True
 
-        else: 
-            try:
-                date=datetime.strptime(string_date, "%m-%d-%y")
+        
+            #Date validation
+        try:
+            date=datetime.strptime(string_date, "%m-%d-%y")
 
-            except ValueError:
-                msg = "Please enter a valid date"
-            
+        except ValueError:
+            date_val = None
+        
+        else:
+            if date > date.today():
+                date_val = None 
             else:
-                if date > date.today():
-                    msg = "Please enter a valid date" 
+                date_val = True
+                #If address and date are ok, check the rest of the info
+                 
+        pet_info = [breed, color, location]
+        count = 0              
+        for data in pet_info:
+            if data == '' or data == None:             
+                break
+            else:                
+                count = count + 1                            
 
-                else:   
-                    pet_info = [breed, color, location]              
-                    for data in pet_info:
-                        if data == '' or data == None:                    
-                            msg ="Please enter all the information."
-                            break
-                        else:                          
-                            info_completed = True
+        if count == 3 and address_val == True and  date_val == True:                        
+            info_completed = True   
+            
+
 
         if info_completed == True:               
             img="/static/img/Noimage.PNG"
             if animal_type == 'cat':
                 img="/static/img/CAT.png"
+            #Create a new pet 
             pet = crud.create_pet(user_id, name, animal_type, pet_type, 
                 gender, breed, color, location, lat, lng, date, img)
             db.session.add(pet)
@@ -194,15 +205,15 @@ def register_pet():
             session['new_pet_id']=pet.pet_id
             new_pet_id = session.get('new_pet_id')
 
+        else:
+            if address_val == None:
+                msg = "Please enter a valid addres"
+            elif date_val == None:
+                msg = "Please enter a valid date"
+            elif count <3:
+                msg ="Please enter all the information"
+
     return jsonify({'msg': msg})
-
-
-#@app.route("/show_reg_form_2")
-#def show_reg_form_2():
- #   """show the form if the registration has started"""
-  #  new_pet_id = session.get("new_pet_id")  
-
-   # return jsonify({'new_pet_id':new_pet_id})
 
 
 @app.route("/register_a_pet/pet_image", methods=['POST'])
@@ -242,6 +253,7 @@ def get_pet_information():
     "Get infotmation about the pet(s) to look for"
     #Get user info    
     user_id = session.get("user_id")
+    #Set variables
     session['new_pet_id']=None 
     fname = 'Uknown'
     pets_to_look=[]
@@ -249,14 +261,14 @@ def get_pet_information():
     if user_id is None:
         msg='Please log in.'
           
-    #Define user type
+    #Get user's pets
     else:
         fname = session["user_fname"]
         all_pets = []
         all_pets = crud.get_all_pets_by_user_id(user_id)
 
         for pet in all_pets:
-            if pet.pet_type != 'found':
+            if pet.pet_type != 'found': 
                 pets_to_look.append(pet)
 
 
@@ -278,10 +290,19 @@ def get_pet_information():
 @app.route('/lost_pet/<pet_id>/found')
 def update_pet_type(pet_id):
     """Change the status of the selected pet"""
+    #If user does not want to continue loking for a pet
+    #change the pet type to found
     pet = crud.get_pet_by_id(pet_id)
     pet.pet_type = 'found'
     db.session.commit()
-    flash('We have changed the pet´s status to "found".')
+    flash('We have changed the status of your pet to "found".')
+
+    user_id = session.get("user_id")
+    all_pets = crud.get_all_pets_by_user_id(user_id)
+
+    if len(all_pets) >=1:
+        return redirect("/look_for_pet")
+
     return redirect('/')
 
 
@@ -289,7 +310,7 @@ def update_pet_type(pet_id):
 
 @app.route('/lost_pet/<pet_id>/')
 def show_list_matches(pet_id):
-    """Show list of matches."""
+    """Show template matches and get id of pet to look for"""
     session['pet_id'] = pet_id
     
     return render_template('matches.html')
@@ -297,26 +318,28 @@ def show_list_matches(pet_id):
 
 
 @app.route('/matches.json')
-def get_pet_info():
+def get_matches():
+    """Get the matches of the chosen pet (pet to look for)"""
+    #Get pet chosen info
     pet_id = session['pet_id']
     pet_to_look = crud.Pet.query.get(pet_id)
     animal_type = pet_to_look.animal_type
     pet_type = pet_to_look.pet_type
 
+    #Look according of the pet type
     if pet_type=="lost":
         pet_list=crud.get_rescued_pets(animal_type)
     elif pet_type=="rescued":
         pet_list=crud.get_lost_pets(animal_type)   
-    
-
-    
+        
     matches = []
+    #Define matches according to the search criteria
     for pet in pet_list:
         if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:
             
             pet_breed_lst=[]
             pet_breed = copy(pet.breed)
-            #it is a match if one word in breed matches
+            #Code to check if, least, one in breed mathes
             if ',' in pet.breed:
                 pet_breed=pet.breed.split(',')
             elif ' ' in pet.breed:
@@ -348,7 +371,7 @@ def get_pet_info():
                 if pet_breed_lst[0] in pet_look_breed_lst:
                     breed = True
 
-            #it is a match if one word in color matches
+            #Code to check if, least, one word in color mathes
             pet_color_lst=[]
             pet_color = copy(pet.color)
             if ',' in pet.color:
@@ -404,6 +427,7 @@ def get_pet_info():
        
         
         #Changing the pets object, for a dictionary
+        #The distance will be check by the jsx file
         for pet in matches:
             pet_dict = {}
             pet_dict['pet_id'] = pet.pet_id
@@ -430,15 +454,17 @@ def get_pet_info():
 
 @app.route("/change_pet_type.json", methods=["POST"])
 def change_pet_type():
-    """Change the pet type to found."""    
-    id_lost_pet = session['pet_id']         
+    """Change the pet type to found."""  
+    msg2=''
+    id_lost_pet = session['pet_id'] 
+    print(request.json.get('match_pet_id'))        
     id_match_pet = request.json.get('match_pet_id') 
     lost_pet=crud.get_pet_by_id(id_lost_pet)
     lost_pet.pet_type='found'
     match_pet=crud.get_pet_by_id(id_match_pet)
     match_pet.pet_type='found'    
     db.session.commit()
-    msg2 = f'We have changed the pet type status to "found".'
+    msg2 = 'We have changed the pet type status to "found".'
     return jsonify({'msg2': msg2})
     
 

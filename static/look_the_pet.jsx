@@ -1,6 +1,6 @@
 function MatchInfo(props) {
   return (
-    <div className="match_pet">
+    <div className="col-sm-12 col-md-3 match_pet">
       <p>Pet's id: {props.pet_id}</p>
       <p>Name: {props.name}</p>
       <p>Breed: {props.breed} </p>
@@ -9,7 +9,7 @@ function MatchInfo(props) {
       <p>Address where the pet was lost\found: {props.location}</p>
       <p>Rescuer\Owner's name: {props.user_name}</p>
       <p>Rescuer\Owner's's email: {props.user_email}</p>
-      <img src={props.img} alt="profile" />
+      <img width="200px" src={props.img} alt="profile" />
     </div>
   );
 };
@@ -36,7 +36,7 @@ function PetMatchesContainer(){
   };  
   return(
   <React.Fragment>
-  <div className="matchesList">{matchesList}</div>
+  <div className="row justify-content-around align-items-center matchesList">{matchesList}</div>
   </React.Fragment>
   ); 
 };
@@ -45,20 +45,22 @@ const pet_id_matches = [];
 function AskIfPetWasFound() {
   let selectOption = [];
   for (let petId of pet_id_matches){
-    selectOption.push(<option key={petId} name ='pet_id_match' value={petId}>{petId}</option>);
+    selectOption.push(<option key={petId} className ='pet_id_match' value={petId}>{petId}</option>);
   };
   return ( 
-        <section id="found_pet"> 
-          <form className="found_pet">
-            <h2>Did you find your pet? </h2>
-              <label>
-                If you found your pet, please select the pet's id we should remove from the database: 
-              <select id="match_pet_id" name="match_pet_id">
-                {selectOption}
-              </select>        
-              </label>      
-            <button type="submit">Submit</button>
-          </form>  
+        <section className="row justify-content-center align-items-center" id="found_pet"> 
+          <div className="col-12 text-center">
+            <form className="found_pet">
+              <h2>Did you find your pet? </h2>
+                <label>
+                  If you found your pet, please select the pet's id we should remove from the database: 
+                <select className="match_pet_id" name="match_pet_id">
+                  {selectOption}
+                </select>        
+                </label>      
+              <button type="submit">Submit</button>
+            </form>
+          </div>  
         </section>   
   );
 };
@@ -67,8 +69,8 @@ function AskIfPetWasFound() {
 function changePetType(evt) {
   evt.preventDefault();
 
-  const data= {match_pet_id:document.querySelector('option[name="pet_id_match"').value,};
-  //console.log(data);
+  const data= {match_pet_id:document.querySelector('.match_pet_id').value};
+  console.log(data);
   
   const url = '/change_pet_type.json'; 
   fetch(url, {  
@@ -80,7 +82,8 @@ function changePetType(evt) {
   })
   .then(response =>  response.json())
   .then(jsonData => {
-    document.querySelector('#message2').innerHTML = jsonData.msg2;
+    console.log(jsonData);
+    document.querySelector('.message2').innerHTML = jsonData.msg2;
           
   });    
 }; 

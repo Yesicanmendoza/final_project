@@ -4,55 +4,75 @@
 {% block body %}
   {% if msg == 'Please log in.' %}
     <div>
-      <p id="message">{{msg}}</p>
+      <p class="message">{{msg}}</p>
     </div>
   {% endif %}
 
   {% if msg != 'Please log in.' %}
-    <ul>
-      <h1>Let's look for your pet</h1>
-      <div>
-        <p id="message">{{msg}}</p>
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 text-center">
+        <p class="lead">
+          <h1>Let's look for your pet</h1>
+        </p>
       </div>
-      {% for pet in pets %}
-        <li>
-          <div id="reg_pets">      
+    </div>
+    
+    <div>
+      <p id="message">{{msg}}</p>
+    </div>
+
+    <div class="container">
+      <div class ="row justify-content-around align-items-center">
+        {% for pet in pets %}    
+          <div class="col-sm-12 col-md-3 reg_pets" >      
             <p><a href="/lost_pet/{{ pet.pet_id }}">{{ pet.name }}</a></p>
             <p>Pet's id: {{pet.pet_id}}</p>
             <p>Animal type: {{pet.animal_type}}</p>
+            <p>Pet's type: {{pet.pet_type}}</p>
             <p>Pet's gender: {{pet.gender}}</p>
             <p>Pet's breed: {{pet.breed}}</p>
-            <p>Pet's gender: {{pet.color}}</p>            
+            <p>Pet's color: {{pet.color}}</p>            
             <p>Location where the {{pet.animal_type}} was {{pet.pet_type}}: {{pet.location}}</p>         
-            <img src={{pet.img}} alt="profile" />
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
+            <img width="200px"src={{pet.img}}  alt="profile" />
+          </div>    
+        {% endfor %}
+      </div>
+    </div>
 
     {% if pets != [] %}
-      <h1>Stop looking for your pet?</h1>
+
+    <div class="container stop_look">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 text-center">
+          <p class="lead">
+            <h1>Stop looking for your pet?</h1>
+          </p>
+        </div>
+      </div>
+      
       <div>
         <p>Click on your pet's name to change its status to "found".</p>
       </div>
       
-      <ul>
-        {% for pet in pets %}
-          <li>
-            <div>    
+      <div class="container">
+        <div class ="row justify-content-around align-items-center">
+          {% for pet in pets %}
+            <div class="col-sm-12 col-md-3 reg_pets">    
               <a href="/lost_pet/{{ pet.pet_id }}/found">
                 {{ pet.name }}
               </a>
-              <img src={{pet.img}} alt="profile" />
-            </div> 
-          </li>
-        {% endfor %}
-      </ul>
+              <img width="200px" src={{pet.img}} alt="profile" />
+            </div>          
+          {% endfor %}
+        </div>
+      </div>
+     
 
     {% endif %}    
     <a href='/'>Return to the homepage.</a>
+  </div>
   {% endif %} 
-  
-  
 
 {% endblock %}

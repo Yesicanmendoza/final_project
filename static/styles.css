@@ -2,11 +2,8 @@
   display: none;
 }
 
-
-
 body {  
-  background-color: #e9edc9;
-  margin:10px;
+  background-color: #e9edc9; 
   font-family: 'Font Zone 108', serif;
   font-style: italic; 
   font-size: 18px   
@@ -20,23 +17,25 @@ h1 {
   font-size: 50px;  
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  margin: initil;
+h2,h3 {
+  font-weight: bold;
 }
 
-img {
-  height: 200px;
-  width: 200px;
+a {
+  color: rgb(143, 4, 4);
+  font-weight: bold;
+}
+
+img {  
   border: 2px solid brown;
+  margin: 10px;
 }
 
 div {  
   text-align: justify;  
 }
 
-.flash-msg, .login_msg {
+.flash-msg, .login_msg, .message, .message2 {
   color: red;
   font-weight: bold;
 }
@@ -44,7 +43,7 @@ div {
 #navigation {
   background: #333 url('/static/img/cats-dogs.png');
   background-size: cover;
-  height: 300px;
+  height: 250px;
   width: 57%;
   display: block;
   margin-left: auto;
@@ -58,40 +57,31 @@ div {
   #signup, #logout, #login  { 
     text-align: center;  
     margin-top: 10px;  
-    vertical-align: top;
-    
+    vertical-align: top;    
   }
 
   #app_exp {
-    background-color: whitesmoke;
-    margin-right: 40px;
-
+    background-color: whitesmoke;    
   }
 
-  #location_field {    
-    height: 50px;
-    width: 500px;    
+  input[type='text'] { 
+    border: 1px solid rgb(48, 47, 47); 
   }
 
-  #register_pet_2 {
-    margin-left: 50px; 
+  
+  #k-chihuahua {  
+    margin: 10px;    
   }
 
-  #k-chihuahua {    
-    height: 300px;
-    width: 390px;
-    margin: 10px;
-    
-  }
-
-  #matches { 
+  .reg_pets, .match_pet {
+    border: 2px solid brown;
     display: inline-block;
-    padding: 10px;
-    margin: initil;  
-    margin-right: 100px; 
-    width: 200%;
+    background-color: whitesmoke;
   }
 
+  .stop_look {
+    margin-top: 20px;
+  }
 
   input[type='submit'] {
     border: 1px solid black;
@@ -100,4 +90,21 @@ div {
     background: #a44a3f;    
   }
 
- 
+  input[type='file'] {
+    border: 1px solid black;
+    border-radius: 0;
+    box-shadow: 2px 2px 0 black;
+    background:  whitesmoke;    
+  }
+
+  #foundPet {
+    margin-top: 50px;
+    background: #aa8057;
+    font-weight: bold;
+    font-size: 25px 
+  }
+
+  .final_nav {
+    margin-top: 50px;
+    background:  whitesmoke;
+  }

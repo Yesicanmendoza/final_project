@@ -4,6 +4,7 @@
 {% block body %}
 
 <p class="login_msg"></p>
+
 <div class="container reg_form_title">
   <div class="row justify-content-center align-items-center">
     <div class="col-12 text-center">
@@ -12,16 +13,16 @@
       </p>
     </div>
   </div>
-</div>
+
 
 <div class="container register_pet_form">  
-  <div class="row">
+  <div class="row justify-content-between align-items-center">
     <div class="col-sm-12 col-md-6" id="register_pet">
-      <h2>STEP 1. Introduce your pet information</h2>
+      <h2>STEP 1. Enter your pet's information</h2>
         <section id="pet_reg_field">
           <form action="/pet_registration" method="POST" class="pet_reg_field">
             <p>
-              Enter the pet's name, if you don't know it just continue to the next line:<input type="text" name="name" id="name_field">
+              Enter the pet's name, if you don't know it, just skip it:<input type="text" name="name" id="name_field">
             </p>
             <p>
               <label>Select the animal type of your pet: 
@@ -53,7 +54,7 @@
             </p>
             <p>
               Address of the location where you lost or found the pet: 
-              <div><input type="text" name="location" id="location_field"></div>
+              <div><input type="text" class="form-control"  name="location" id="location_field"></div>
             </p>
             <p>
               Date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">
@@ -68,14 +69,14 @@
         </section>       
     </div>
 
-    <div class="col-sm-12 col-md-4" id="register_pet_2">      
+    <div class="col-sm-12 col-md-5" id="register_pet_2">      
       <h2>STEP 2. Add an image about your pet</h2>        
         <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
           Please upload a photo about your pet.
           <input type="file" name="img">
           <input type="submit">
         </form>
-        <img src="/static/img/kitty-chihuahua.jpg" id="k-chihuahua"/>
+        <img width="400px"src="/static/img/kitty-chihuahua.jpg" id="k-chihuahua"/>
         <p>If you don't have a picture you can start to look for your pet <a href='/look_for_pet'>here.</a></p>
     </div>
   </div>
@@ -87,5 +88,5 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJE2gIjshSu3xoXxDVLvuJ4YxTAyV_Udo&callback=initMap">
   </script>
 
-
+</div>
 {% endblock %}
