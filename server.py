@@ -107,7 +107,7 @@ def log_out():
     """User can log out."""
     session['user_id']= None
     session['user_fname']= None
-    flash("You have logged out")
+    flash("You have logged out.")
 
     return redirect('/')
 
@@ -201,17 +201,17 @@ def register_pet():
                 gender, breed, color, location, lat, lng, date, img)
             db.session.add(pet)
             db.session.commit()
-            msg = "Information saved, please continue with the step two."
+            msg = "The information was saved, please continue with the step two."
             session['new_pet_id']=pet.pet_id
             new_pet_id = session.get('new_pet_id')
 
         else:
             if address_val == None:
-                msg = "Please enter a valid addres"
+                msg = "Please enter a valid address."
             elif date_val == None:
-                msg = "Please enter a valid date"
+                msg = "Please enter a valid date."
             elif count <3:
-                msg ="Please enter all the information"
+                msg ="Please enter all the information."
 
     return jsonify({'msg': msg})
 
@@ -241,7 +241,7 @@ def get_url_img():
         pet=crud.get_pet_by_id(new_pet_id)
         pet.img = img
         db.session.commit()
-        flash("Your pet has successfully been registrated.")
+        flash("Your pet has successfully been registered.")
         session['new_pet_id']=None
         
     return redirect("/look_for_pet")
@@ -276,7 +276,7 @@ def get_pet_information():
             msg = f"{fname}, you do not have pets to look for."
         else:            
             if len(pets_to_look)==1:
-                msg = f"{fname}, click in your pet's name to look for a match."
+                msg = f"{fname}, click on your pet's name to look for a match."
             else:
                 msg = f"{fname}, select one pet to look for by clicking the name."
 
@@ -418,11 +418,11 @@ def get_matches():
     matches_and_pet_to_look = []
 
     if len(matches)==0:               
-        msg = 'There are not matches'
+        msg = 'There are not matched.'
         matches_and_pet_to_look = None
         
     else:
-        msg = 'Here are the matches:'
+        msg = 'Showing the matches:'
         matches.append(pet_to_look)
        
         
@@ -433,7 +433,7 @@ def get_matches():
             pet_dict['pet_id'] = pet.pet_id
             pet_dict['name'] = pet.name
             #pet_dict['animal_type'] = pet.animal_type
-            #pet_dict['pet_type'] = pet.pet_type
+            pet_dict['pet_type'] = pet.pet_type
             pet_dict['gender'] = pet.gender  
             pet_dict['breed'] = pet.breed
             pet_dict['color'] = pet.color  
@@ -442,6 +442,10 @@ def get_matches():
             pet_dict['lat'] = pet.lat
             pet_dict['lng'] = pet.lng
             pet_dict['img'] = pet.img
+            pet_dict['date'] = f'{pet.date.date()}'
+            pet_dict['user_type'] = "Rescuer"
+            if pet.pet_type == 'lost':
+               pet_dict['user_type'] = "Owner"               
             pet_user = crud.get_user_by_id(pet.user_id)
             pet_dict['user_name'] = pet_user.fname
             pet_dict['user_email'] = pet_user.email

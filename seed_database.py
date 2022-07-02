@@ -64,8 +64,8 @@ model.db.session.commit()
 
 
 #Create a db for rescued cats
-#rescued_cats_in_db=create_db_rescued_pets(data.list_rescued_cats, "cat")
-#model.db.session.add_all(rescued_cats_in_db)
-#model.db.session.commit()
+rescued_cats_in_db=create_db_rescued_pets(data.list_rescued_cats, "cat")
+model.db.session.add_all(rescued_cats_in_db)
+model.db.session.commit()
 
 

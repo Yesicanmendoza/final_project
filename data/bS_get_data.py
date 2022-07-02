@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://www.oregonhumane.org/adopt/?type=dogs"
+url = "https://www.oregonhumane.org/adopt/?type=cats"
 
 #"https://www.oregonhumane.org/adopt/?type=cats"
 #"https://www.oregonhumane.org/adopt/?type=dogs"
@@ -26,7 +26,7 @@ for info_pet in info_pets:
 
    pet["user_id"] = user_id
 
-   pet["animal_type"]= "dog"
+   pet["animal_type"]= "cat"
    #"cat"
    #dog
 

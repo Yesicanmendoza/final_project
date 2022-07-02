@@ -11,7 +11,7 @@ function sendGeocodInfo(data){
     .then(response =>  response.json())
     .then(jsonData => {
 
-      document.querySelector('.login_msg').innerHTML = jsonData.msg;   
+      document.querySelector('.msg').innerHTML=jsonData.msg;   
           
     });
 }; 

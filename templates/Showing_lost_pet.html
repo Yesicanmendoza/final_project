@@ -28,13 +28,14 @@
         {% for pet in pets %}    
           <div class="col-sm-12 col-md-3 reg_pets" >      
             <p><a href="/lost_pet/{{ pet.pet_id }}">{{ pet.name }}</a></p>
-            <p>Pet's id: {{pet.pet_id}}</p>
-            <p>Animal type: {{pet.animal_type}}</p>
-            <p>Pet's type: {{pet.pet_type}}</p>
-            <p>Pet's gender: {{pet.gender}}</p>
-            <p>Pet's breed: {{pet.breed}}</p>
-            <p>Pet's color: {{pet.color}}</p>            
-            <p>Location where the {{pet.animal_type}} was {{pet.pet_type}}: {{pet.location}}</p>         
+            <p><code>Pet's id:</code> {{pet.pet_id}}</p>
+            <p><code>Animal type:</code> {{pet.animal_type}}</p>
+            <p><code>Pet's type:</code> {{pet.pet_type}}</p>
+            <p><code>Pet's gender:</code> {{pet.gender}}</p>
+            <p><code>Pet's breed:</code> {{pet.breed}}</p>
+            <p><code>Pet's color:</code> {{pet.color}}</p>            
+            <p><code>Location where the {{pet.animal_type}} was {{pet.pet_type}}:</code> {{pet.location}}</p> 
+            <p><code>Date when your pet was {{pet.pet_type}}:</code> {{pet.date.date()}}</p>        
             <img width="200px"src={{pet.img}}  alt="profile" />
           </div>    
         {% endfor %}

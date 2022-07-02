@@ -2,11 +2,13 @@
   display: none;
 }
 
-body {  
+body { 
+  margin: 0; 
   background-color: #e9edc9; 
   font-family: 'Font Zone 108', serif;
   font-style: italic; 
-  font-size: 18px   
+  font-size: 18px 
+   
 }
 
 h1 {
@@ -35,7 +37,7 @@ div {
   text-align: justify;  
 }
 
-.flash-msg, .login_msg, .message, .message2 {
+.flash-msg, .login_msg, .message, .message2, .msg {
   color: red;
   font-weight: bold;
 }
@@ -79,6 +81,11 @@ div {
     background-color: whitesmoke;
   }
 
+  code {
+    color: #a44a3f;
+    font-weight: bold;
+  }
+  
   .stop_look {
     margin-top: 20px;
   }

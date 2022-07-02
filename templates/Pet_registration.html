@@ -11,76 +11,77 @@
       <p class="lead">
         <h1>Register your pet</h1>
       </p>
+        <p class="msg"></p>
     </div>
   </div>
 
 
-<div class="container register_pet_form">  
-  <div class="row justify-content-between align-items-center">
-    <div class="col-sm-12 col-md-6" id="register_pet">
-      <h2>STEP 1. Enter your pet's information</h2>
-        <section id="pet_reg_field">
-          <form action="/pet_registration" method="POST" class="pet_reg_field">
-            <p>
-              Enter the pet's name, if you don't know it, just skip it:<input type="text" name="name" id="name_field">
-            </p>
-            <p>
-              <label>Select the animal type of your pet: 
-                <select id="animal_type_field" >
-                  <option   name='dog' value= 'dog' >Dog</option>
-                  <option   name='cat' value= 'cat' >Cat</option>
-                </select>
-              </label>
-            </p>
-              <label>Choose if your pet is a lost o rescued one: 
-                <select id="pet_type_field" >
-                  <option   name='lost' value= 'lost' >Lost pet</option>
-                  <option   name='rescued' value= 'rescued' >Rescued pet</option>
-                </select>
-              </label>
-            <p>
-              <label>What is your pet's gender? 
-                <select id="gender_field" >
-                  <option   name='male' value= 'male' >Male</option>
-                  <option   name='female' value= 'female' >Female</option>
-                </select>
-              </label>            
-            </p>
-            <p>
-              Breed: <input type="text" name="breed" id="breed_field">
-            </p>
-            <p>
-              Color: <input type="text" name="color" id="color_field">
-            </p>
-            <p>
-              Address of the location where you lost or found the pet: 
-              <div><input type="text" class="form-control"  name="location" id="location_field"></div>
-            </p>
-            <p>
-              Date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">
-            </p>
-            <section class="map">
-              <div id="map"></div>
-            </section>        
-            <p>
-              <input type="submit">
-            </p>   
+  <div class="container register_pet_form">  
+    <div class="row justify-content-between align-items-center">
+      <div class="col-sm-12 col-md-6" id="register_pet">
+        <h2>STEP 1. Enter your pet's information</h2>
+          <section id="pet_reg_field">
+            <form action="/pet_registration" method="POST" class="pet_reg_field">
+              <p>
+                Enter the pet's name, if you don't know it, just skip it:<input type="text" name="name" id="name_field">
+              </p>
+              <p>
+                <label>Select the animal type of your pet: 
+                  <select id="animal_type_field" >
+                    <option   name='dog' value= 'dog' >Dog</option>
+                    <option   name='cat' value= 'cat' >Cat</option>
+                  </select>
+                </label>
+              </p>
+                <label>Choose if your pet is a lost o rescued one: 
+                  <select id="pet_type_field" >
+                    <option   name='lost' value= 'lost' >Lost pet</option>
+                    <option   name='rescued' value= 'rescued' >Rescued pet</option>
+                  </select>
+                </label>
+              <p>
+                <label>What is your pet's gender? 
+                  <select id="gender_field" >
+                    <option   name='male' value= 'male' >Male</option>
+                    <option   name='female' value= 'female' >Female</option>
+                  </select>
+                </label>            
+              </p>
+              <p>
+                Breed: <input type="text" name="breed" id="breed_field">
+              </p>
+              <p>
+                Color: <input type="text" name="color" id="color_field">
+              </p>
+              <p>
+                The address of the location where you lost or found the pet: 
+                <div><input type="text" class="form-control"  name="location" id="location_field"></div>
+              </p>
+              <p>
+                The date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">
+              </p>
+              <section class="map">
+                <div id="map"></div>
+              </section>        
+              <p>
+                <input type="submit">
+              </p>   
+            </form>
+          </section>       
+      </div>
+
+      <div class="col-sm-12 col-md-5" id="register_pet_2">      
+        <h2>STEP 2. Add an image about your pet</h2>        
+          <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
+            Please upload a photo of your pet.
+            <input type="file" name="img">
+            <input type="submit">
           </form>
-        </section>       
-    </div>
-
-    <div class="col-sm-12 col-md-5" id="register_pet_2">      
-      <h2>STEP 2. Add an image about your pet</h2>        
-        <form action="/register_a_pet/pet_image" method="post" enctype="multipart/form-data">
-          Please upload a photo about your pet.
-          <input type="file" name="img">
-          <input type="submit">
-        </form>
-        <img width="400px"src="/static/img/kitty-chihuahua.jpg" id="k-chihuahua"/>
-        <p>If you don't have a picture you can start to look for your pet <a href='/look_for_pet'>here.</a></p>
+          <img width="400px"src="/static/img/kitty-chihuahua.jpg" id="k-chihuahua"/>
+          <p>If you don't have a picture you can start to look for your pet <a href='/look_for_pet'>here.</a></p>
+      </div>
     </div>
   </div>
-</div>
 
   <script src="/static/pet_info.js"></script>
   <script
