@@ -52,8 +52,8 @@ function AskIfPetWasFound() {
     selectOption.push(<option key={petId} className ='pet_id_match' value={petId}>{petId}</option>);
   };
   return ( 
-        <section className="row justify-content-center align-items-center" id="found_pet"> 
-          <div className="col-12 text-center">
+        <section className="row justify-content-around align-items-center" id="found_pet"> 
+          <div className="col-sm-12 col-md-6">
             <form className="found_pet">
               <h2>Did you find your pet? </h2>
                 <label>
@@ -64,7 +64,10 @@ function AskIfPetWasFound() {
                 </label>      
               <button type="submit">Submit</button>
             </form>
-          </div>  
+          </div> 
+          <div className="col-sm-12 col-md-6" id="img-home">
+            <img width="400px"src='/static/img/puppy-kiittens.jpg' />
+          </div> 
         </section>   
   );
 };

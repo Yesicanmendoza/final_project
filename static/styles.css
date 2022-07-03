@@ -16,17 +16,58 @@ h1 {
   background-color:#d4a373;
   color: #a44a3f;
   font-weight: bold;
-  font-size: 50px;  
+  font-size: 50px; 
+  box-shadow: 6px 6px #9c7650b7; 
+  margin-top: 10px;
 }
 
 h2,h3 {
   font-weight: bold;
+  color:#540b0e;
 }
 
 a {
   color: rgb(143, 4, 4);
   font-weight: bold;
 }
+
+.header {
+ background-color: #472d30; 
+}
+
+ul {
+  list-style: none;
+}
+
+.nav {
+  background-color: #472d30;
+  color: whitesmoke; 
+}
+
+.nav li a{
+  text-decoration: none;
+  background-color: #472d30;
+  color: whitesmoke;
+  display: block;
+}
+
+.nav li a:hover {
+  background-color: #723d46;
+}
+
+.nav > li {
+  float:left;
+}
+
+.nav li ul {
+  display: none;
+  position: absolute;
+}
+ 
+.nav li:hover > ul {
+  display: block;
+}
+
 
 img {  
   border: 2px solid brown;
@@ -42,7 +83,7 @@ div {
   font-weight: bold;
 }
 
-#navigation {
+#info {
   background: #333 url('/static/img/cats-dogs.png');
   background-size: cover;
   height: 250px;
@@ -53,6 +94,8 @@ div {
   line-height: 55px;
   text-align: center;
   border: 2px solid brown;
+  font-size: 23px 
+
   
 }
   
@@ -63,7 +106,19 @@ div {
   }
 
   #app_exp {
-    background-color: whitesmoke;    
+    background-color: whitesmoke;
+    box-shadow: 5px 5px #c9cba3;    
+  }
+
+  .app_exp_1 {
+    background-color: whitesmoke;
+    box-shadow: 5px 5px #c9cba3; 
+    margin-top: 50px;   
+  }
+
+  .app_exp_2 {
+    background-color: whitesmoke;
+    box-shadow: 5px 5px #c9cba3;    
   }
 
   input[type='text'] { 
@@ -85,7 +140,7 @@ div {
     color: #a44a3f;
     font-weight: bold;
   }
-  
+
   .stop_look {
     margin-top: 20px;
   }
@@ -106,12 +161,11 @@ div {
 
   #foundPet {
     margin-top: 50px;
-    background: #aa8057;
+    background: #c9cba3;
     font-weight: bold;
-    font-size: 25px 
+    font-size: 20px     
   }
 
-  .final_nav {
-    margin-top: 50px;
-    background:  whitesmoke;
-  }
+.found_pet {
+  text-align: center; 
+}

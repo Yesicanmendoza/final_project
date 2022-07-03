@@ -3,13 +3,66 @@
 
 {% block body %}
 <div class="container">
+  <div class="row header">
+    <div class="col-12">
+      <p class="lead">      
+        <ul class="nav">
+          <li><a href="">Navigation</a>
+            <ul>
+              <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
+              <li><a href='/look_for_pet'>Look for a pet.</a></li>
+            </ul> 
+          </li>         
+        </ul>
+      </p>       
+    </div>
+  </div>
+
   <div class="row justify-content-center align-items-center">
     <div class="col-12 text-center">
-      <p class="lead">
+      <p>
         <h1>Following your pad  &#128062;</h1>
       </p>
     </div>
   </div>
+
+  <div class="container"> 
+    <div class="row justify-content-between align-items-center">
+      <div class="col-sm-12 col-md-6 app_exp" id="app_exp">        
+        <p>
+          <h3>How does this application work?</h3>   
+          <ul>
+            <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
+            <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
+            <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
+            <li>The search criteria are based on the following characteristics:</li>
+              <ul>
+                <li>Breed:The list of matches is going to show you the pets with at least "one" word in common.</li>
+                <li>Color: At least one color must match.</li>
+                <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
+              </ul>
+            <li>Once the you get a match (or matches), you will be able to email the rescuer or the owner.</li> 
+            <li>If you found the pet you were looking for, submit its id, so we can change its status.</li>  
+          </ul>
+        </p>
+      </div>
+      <div class="col-sm-12 col-md-6" id="img-home">
+        <img width="550px"src='/static/img/doggie-kittens.PNG' />
+      </div>
+    </div>
+  </div> 
+  
+  <section class="full-columns">
+    <section class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 text-center">
+          <p class="lead welcome">
+            <h1>Let us help you to find your pet</h1>        
+          </p>
+        </div>
+      </div>
+    </section>
+  </section>
 
   <div class="container"> 
     <div class="row">
@@ -61,61 +114,30 @@
     </div>
   </div> 
 
-  <div id="navigation">
-    <h2>Navigation</h2>
-    <ul>
-      <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
-      <li><a href='/look_for_pet'>Look for a pet.</a></li>
-    </ul>
+  <div id="info">
+    <h2>Did you know?</h2>
+      <p>About 92% of lost dogs have a family.</p>
   </div>
- 
-  <section class="full-columns">
-    <section class="container">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-12 text-center">
-          <p class="lead welcome">
-            <h1>Let us help you to find your pet</h1>        
-          </p>
-        </div>
-      </div>
-    </section>
-  </section>
 
     
       <div class="container">
         <div class="row  justify-content-between align-items-center">
-          <div class="col-sm-12 col-md-4 app_exp" id="app_exp">        
+          <div class="col-sm-12 col-md-5 app_exp_1" >        
             <p>
-              <h3>How does this application work?</h3>   
-              <ul>
-                <li>You can create an account and be able to register a lost or a rescued pet (cat or dog).</li>
-                <li>If you have lost your pet, you can look for a match in the list of registered rescued pets.</li>
-                <li>On the contrary, if you have rescued a pet, you can look for a match in the list of registered lost pets. </li>
-                <li>The search criteria are based on the following characteristics:</li>
-                  <ul>
-                    <li>Breed:The list of matches is going to show you the pets with at least "one" word in common.</li>
-                    <li>Color: At least one color must match.</li>
-                    <li>Distance: We consider a distance of 30 miles around from where the pet was lost or rescued.</li>
-                  </ul>
-                <li>Once the you get a match (or matches), you will be able to email the rescuer or the owner.</li> 
-                <li>If you found the pet you were looking for, submit its id, so we can change its status.</li>  
-              </ul>
-            </p>
+              <p>
+                <h3>I have lost my pet, what should I do?</h3>
+                <ul>We suggest the next steps:
+                  <li>Check local shelters' websites every 1-3 days  for new arrivals.</li>
+                  <li>Check and post to the many lost pet Facebook pages for your area.</li>
+                  <li>If your dog has a microchip, contact your microchip company and ensure your phone number is updated in their system.</li>
+                  <li>Create a user on this website to check for matches every 1-3 days.</li>
+                  <li>If you found a match that can be your pet, contact the rescuer.</li>   
+                </ul>
+              </p>
           </div>
             
         
-          <div class="col-sm-12 col-md-7">     
-            <p>
-              <h3>I have lost my pet, what should I do?</h3>
-              <ul>We suggest the next steps:
-                <li>Check local shelters' websites every 1-3 days  for new arrivals.</li>
-                <li>Check and post to the many lost pet Facebook pages for your area.</li>
-                <li>If your dog has a microchip, contact your microchip company and ensure your phone number is updated in their system.</li>
-                <li>Create a user on this website to check for matches every 1-3 days.</li>
-                <li>If you found a match that can be your pet, contact the rescuer.</li>   
-              </ul>
-            </p>
-
+          <div class="col-sm-12 col-md-6 app_exp_2">    
             <p>
               <h3>I have rescued a pet, what should I do?</h3>
               <ul>
@@ -128,14 +150,18 @@
                 <li>If you found a match that can be your pet, contact the owner.</li>   
               </ul>
             </p>
+          </div>
+        </div> 
+        
+      <div class="row justify-content-center align-items-center">
+          <div class="col-sm-12 col-md-4 app_exp_1">
             <p>
               WHAT YOU NEED TO KNOW:
               Pets are considered to be the legal property of their owners. Finding a pet does not entitle the finder to keep, sell, or give away the pet, nor does it convey ownership to the finder. If you find a pet, you must actively look for the owner for at least 90 days.  Even after that period of time has elapsed, the owner may still have the right to reclaim his/her pet under certain circumstances.
-              According to California Penal Code 485, a person who finds lost property without first making reasonable and just efforts to find the owner and to restore property to the owner may be guilty of theft.  It is important to report the found pet to the animal control agency servicing the area where the pet was found and to follow your jurisdiction's policies and procedures regarding stray animals.
             </p>  
           </div>
         </div>
       </div>
-    
+
 </div>    
 {% endblock %}
