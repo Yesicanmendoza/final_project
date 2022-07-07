@@ -1,16 +1,16 @@
 function MatchInfo(props) {
   return (
-    <div className="col-sm-12 col-md-3 match_pet">
+    <div className="col-sm-12 col-md-4 match_pet">
       <p><code>Pet's id:</code> {props.pet_id}</p>
       <p><code>Name:</code> {props.name}</p>
       <p><code>Breed:</code> {props.breed} </p>
       <p><code>Gender:</code> {props.gender} </p>
       <p><code>Color:</code> {props.color} </p>
-      <p><code>Address where the pet was {props.pet_type}:</code> {props.location}</p>
+      <p><code>Address where the pet was {props.pet_type}:</code> {"\n"}{props.location}</p>
       <p><code>Date when the pet was {props.pet_type}:</code> {props.date}</p>
       <p><code>{props.user_type}'s name:</code> {props.user_name}</p>
-      <p><code>{props.user_type}'s contact email:</code> {props.user_email}</p>
-      <img width="200px" src={props.img} alt="profile" />
+      <p><code>{props.user_type}'s contact email:</code> {"\n"}{props.user_email}</p>
+      <img width="300px" src={props.img} alt="profile" />
     </div>
   );
 };

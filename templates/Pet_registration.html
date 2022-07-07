@@ -7,23 +7,19 @@
 
 <div class="container reg_form_title">
 
-  <div class="container">
-    <div class="row header">
-      <div class="col-12">
-        <p class="lead">      
-          <ul class="nav">
-            <li><a href="">Navigation</a>
+  <div class="container ">
+    <div class="row nav-container" >             
+          <div class="col-6 app_exp nav">
+            <li><a href="">NAVIGATION</a>
               <ul>
                 <li><a href="/">Return to the homepage.</a></li>
-                <li><a href='/look_for_pet'>Look for a pet.</a></li>
-              </ul> 
+                <li><a href='/look_for_pet'>Look for a pet.</a></li>              
+              </ul>
             </li>         
-          </ul>
-        </p>       
-      </div>
+          </div>       
+       <div class="col-6 app_exp" style="width:200px"><a  href="/logout">LOG OUT</a></div>
     </div>
-
-
+  
   <div class="row justify-content-center align-items-center">
     <div class="col-12 text-center">      
         <h1>Register your pet</h1>    
@@ -39,7 +35,15 @@
           <section id="pet_reg_field">
             <form action="/pet_registration" method="POST" class="pet_reg_field">
               <p>
-                Enter the pet's name, if you don't know it, just skip it:<input type="text" name="name" id="name_field">
+                <label>Choose if your pet is a lost o rescued one: 
+                  <select id="pet_type_field" >
+                    <option   name='lost' value= 'lost' >Lost pet</option>
+                    <option   name='rescued' value= 'rescued' >Rescued pet</option>
+                  </select>
+                </label>
+              </p>
+              <p>
+                Enter the pet's name, if unknown, skip it: <input type="text" name="name" id="name_field">
               </p>
               <p>
                 <label>Select the animal type of your pet: 
@@ -49,12 +53,7 @@
                   </select>
                 </label>
               </p>
-                <label>Choose if your pet is a lost o rescued one: 
-                  <select id="pet_type_field" >
-                    <option   name='lost' value= 'lost' >Lost pet</option>
-                    <option   name='rescued' value= 'rescued' >Rescued pet</option>
-                  </select>
-                </label>
+              
               <p>
                 <label>What is your pet's gender? 
                   <select id="gender_field" >
@@ -71,7 +70,7 @@
               </p>
               <p>
                 The address of the location where you lost or found the pet: 
-                <div><input type="text" class="form-control"  name="location" id="location_field"></div>
+                <input type="text" class="form-control"  name="location" id="location_field">
               </p>
               <p>
                 The date when you lost or found the pet(mm-dd-yy): <input type="text" name="date" id="date_field">

@@ -4,16 +4,15 @@
 
 body { 
   margin: 0; 
-  background-color: #e9edc9; 
-  font-family: 'Font Zone 108', serif;
-  font-style: italic; 
-  font-size: 18px 
-   
+  background-color: #e9edc9;  
+  font-family: 'Patrick Hand';
+  font-size: 23px     
 }
 
 h1 {
   text-align: center;
-  background-color:#d4a373;
+  background-color:#d4a373;  
+  font-family: 'Satisfy', cursive;
   color: #a44a3f;
   font-weight: bold;
   font-size: 50px; 
@@ -21,7 +20,7 @@ h1 {
   margin-top: 10px;
 }
 
-h2,h3 {
+h2, h3 { 
   font-weight: bold;
   color:#540b0e;
 }
@@ -31,8 +30,13 @@ a {
   font-weight: bold;
 }
 
-.header {
- background-color: #472d30; 
+.nav-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  height: 85px; 
+  background-color: #472d30; 
+  font-size: 20px; 
 }
 
 ul {
@@ -41,7 +45,8 @@ ul {
 
 .nav {
   background-color: #472d30;
-  color: whitesmoke; 
+  color: whitesmoke;
+  width: 200px; 
 }
 
 .nav li a{
@@ -69,13 +74,29 @@ ul {
 }
 
 
+.nav-container a {
+  color: whitesmoke; 
+  text-decoration: none;  
+}
+
+.nav-container a:hover {
+  background-color: #723d46;
+}
+
 img {  
   border: 2px solid brown;
   margin: 10px;
 }
 
 div {  
-  text-align: justify;  
+  text-align: justify; 
+  line-height: 103%;  
+}
+
+code { 
+  font-family: 'Patrick Hand', cursive;
+  color: #a44a3f;
+  font-weight: bold;
 }
 
 .flash-msg, .login_msg, .message, .message2, .msg {
@@ -94,12 +115,10 @@ div {
   line-height: 55px;
   text-align: center;
   border: 2px solid brown;
-  font-size: 23px 
-
-  
+  font-size: 23px   
 }
   
-  #signup, #logout, #login  { 
+  #signup, #logout { 
     text-align: center;  
     margin-top: 10px;  
     vertical-align: top;    
@@ -134,15 +153,14 @@ div {
     border: 2px solid brown;
     display: inline-block;
     background-color: whitesmoke;
+    line-height: 80%;
+    box-shadow: 10px 5px 5px brown;
+    margin: 10px;
   }
-
-  code {
-    color: #a44a3f;
-    font-weight: bold;
-  }
+ 
 
   .stop_look {
-    margin-top: 20px;
+    margin-top: 20px;    
   }
 
   input[type='submit'] {
@@ -163,7 +181,7 @@ div {
     margin-top: 50px;
     background: #c9cba3;
     font-weight: bold;
-    font-size: 20px     
+    font-size: 30px     
   }
 
 .found_pet {

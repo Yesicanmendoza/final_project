@@ -3,28 +3,25 @@
 
 {% block body %}
 <div class="container">
-  <div class="container">
-    <div class="row header">
-      <div class="col-12">
-        <p class="lead">      
-          <ul class="nav">
-            <li><a href="">Navigation</a>
-              <ul>
-                <li><a href='/'>Return to the homepage.</a></li>
-                <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
-                <li><a href='/look_for_pet'>Look for a pet.</a></li>
-              </ul> 
-            </li>         
-          </ul>
-        </p>        
-      </div>
-    </div>
 
+  <div class="row nav-container" >             
+    <div class="col-6 app_exp nav">
+      <li><a href="">NAVIGATION</a>
+        <ul>
+          <li><a href="/">Return to the homepage.</a></li>
+          <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
+          <li><a href='/look_for_pet'>Look for a pet.</a></li>              
+        </ul>
+      </li>         
+    </div>       
+    <div class="col-6 app_exp" style="width:200px"><a  href="/logout">LOG OUT</a></div>
+  </div>
+    
   <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-12 text-center">
           <p class="lead">
-            <h1>Let's look for your pet</h1>
+            <h1>Looking for your pet</h1>
           </p>
         </div>
       </div>

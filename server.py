@@ -31,8 +31,9 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View homepage."""
-
-    return render_template('homepage.html')
+    user_id = session.get("user_id")
+    print(user_id)
+    return render_template('homepage.html', user_id=user_id)
 
 
 @app.route("/users", methods=["POST"])
@@ -102,7 +103,7 @@ def user_login():
     return redirect('/')
 
 
-@app.route("/logout", methods=['POST'])
+@app.route("/logout", methods=['GET'])
 def log_out():
     """User can log out."""
     session['user_id']= None
