@@ -208,7 +208,7 @@ def register_pet():
 
         else:
             if address_val == None:
-                msg = "Please enter a valid address."
+                msg = "Please enter a valid address. Hint: Copy the address displayed by Google Maps"
             elif date_val == None:
                 msg = "Please enter a valid date."
             elif count <3:
@@ -340,7 +340,7 @@ def get_matches():
             
             pet_breed_lst=[]
             pet_breed = copy(pet.breed)
-            #Code to check if, least, one in breed mathes
+            #Code to check if, least, one in breed matches
             if ',' in pet.breed:
                 pet_breed=pet.breed.split(',')
             elif ' ' in pet.breed:
@@ -372,7 +372,7 @@ def get_matches():
                 if pet_breed_lst[0] in pet_look_breed_lst:
                     breed = True
 
-            #Code to check if, least, one word in color mathes
+            #Code to check if, least, one word in color matches
             pet_color_lst=[]
             pet_color = copy(pet.color)
             if ',' in pet.color:
@@ -469,7 +469,7 @@ def change_pet_type():
     match_pet=crud.get_pet_by_id(id_match_pet)
     match_pet.pet_type='found'    
     db.session.commit()
-    msg2 = 'We have changed the pet type status to "found".'
+    msg2 = f'We have changed the status to "found" of the pets No. {id_lost_pet} and No. {id_match_pet}.'
     return jsonify({'msg2': msg2})
     
 
