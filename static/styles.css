@@ -169,6 +169,13 @@ code {
     background: #a44a3f;    
   }
 
+  .found_pet button {
+    border: 1px solid black;
+    border-radius: 0;
+    box-shadow: 2px 2px 0 black;
+    background: #a44a3f; 
+  }
+  
   input[type='file'] {
     border: 1px solid black;
     border-radius: 0;

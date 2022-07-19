@@ -32,7 +32,7 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage."""
     user_id = session.get("user_id")
-    print(user_id)
+    #print(user_id)
     return render_template('homepage.html', user_id=user_id)
 
 
@@ -168,7 +168,7 @@ def register_pet():
         
             #Date validation
         try:
-            date=datetime.strptime(string_date, "%m-%d-%y")
+            date=datetime.strptime(string_date, "%Y-%m-%d")
 
         except ValueError:
             date_val = None
