@@ -11,30 +11,30 @@ body {
 
 h1 {
   text-align: center;
-  background-color:#d4a373;
-  color:#540b0e;
+  background-color:#e5e5e5;
+  color:#14213d;
   font-weight: bold;
   font-size: 50px; 
-  box-shadow: 6px 6px #9c7650b7; 
+  box-shadow: 6px 6px #9a8c98; 
   margin-top: 10px;
 }
 
 h2, h3 { 
   font-weight: bold;
-  color:#540b0e;
+  color:#14213d;
 }
 
 a {
-  color: rgb(143, 4, 4);
+  color: #e01a4f;
   font-weight: bold;
 }
 
 .nav-container{
   display: flex;
   justify-content: space-between;
-  padding: 25px;
-  height: 85px; 
-  background-color: #472d30; 
+  padding: 15px;
+  height: 58px; 
+  background-color: #000000; 
   font-size: 20px; 
 }
 
@@ -43,20 +43,24 @@ ul {
 }
 
 .nav {
-  background-color: #472d30;
+  background-color: black;
   color: whitesmoke;
   width: 200px; 
 }
 
+.log_out {
+  list-style: none;
+}
+
 .nav li a{
   text-decoration: none;
-  background-color: #472d30;
+  background-color: black;
   color: whitesmoke;
   display: block;
 }
 
 .nav li a:hover {
-  background-color: #723d46;
+  background-color: #2f3e46;
 }
 
 .nav > li {
@@ -79,11 +83,11 @@ ul {
 }
 
 .nav-container a:hover {
-  background-color: #723d46;
+  background-color: #333533;
 }
 
 img {  
-  border: 2px solid brown;
+  border: 2px solid #333533;
   margin: 10px;
 }
 
@@ -94,7 +98,7 @@ div {
 
 code { 
   font-family: 'Patrick Hand', cursive;
-  color: #a44a3f;
+  color: #e01a4f;
   font-weight: bold;
 }
 
@@ -106,18 +110,18 @@ code {
 #info {
   background: #333 url('/static/img/cats-dogs.png');
   background-size: cover;
-  height: 250px;
+  height: 290px;
   width: 57%;
   display: block;
   margin-left: auto;
   margin-right: auto;
   line-height: 55px;
   text-align: center;
-  border: 2px solid brown;
-  font-size: 23px   
+  border: 2px solid #333533;
+  font-size: 23px;   
 }
   
-  #signup, #logout { 
+  #signup, #login { 
     text-align: center;  
     margin-top: 10px;  
     vertical-align: top;    
@@ -149,11 +153,11 @@ code {
   }
 
   .reg_pets, .match_pet {
-    border: 2px solid brown;
+    border: 2px solid #333533;
     display: inline-block;
     background-color: whitesmoke;
     line-height: 80%;
-    box-shadow: 10px 5px 5px brown;
+    box-shadow: 10px 5px 5px #333533;
     margin: 10px;
   }
  
@@ -166,14 +170,14 @@ code {
     border: 1px solid black;
     border-radius: 0;
     box-shadow: 2px 2px 0 black;
-    background: #a44a3f;    
+    background: #fca311;    
   }
 
   .found_pet button {
     border: 1px solid black;
     border-radius: 0;
     box-shadow: 2px 2px 0 black;
-    background: #a44a3f; 
+    background: #fca311; 
   }
   
   input[type='file'] {
@@ -187,9 +191,11 @@ code {
     margin-top: 50px;
     background: #c9cba3;
     font-weight: bold;
-    font-size: 30px     
+    font-size: 30px;
+    border: 2px solid #333533;
+    box-shadow: 10px 5px 5px #333533;          
   }
 
 .found_pet {
-  text-align: center; 
+  text-align: center;   
 }

@@ -3,27 +3,40 @@
 
 {% block body %}
 <div class="container ">
-  <div class="row nav-container" >             
-        <div class="col-6 app_exp nav">
+  <div class="row  nav-container" >             
+        <div class="col-10 nav">
           <li><a href="">NAVIGATION</a>
             <ul>
+              {% if user_id == None %}
+              <li><a href="">Please log in.</a></li>
+              {% endif %} 
+              {% if user_id != None %}
               <li><a href="/register_a_pet">Register a lost/rescued pet.</a></li>
-              <li><a href='/look_for_pet'>Look for a pet.</a></li>              
+              <li><a href='/look_for_pet'>Look for a pet.</a></li>
+              {% endif %}              
             </ul>
-          </li>         
-        </div>          
+          </li> 
+        </div>
+        <div class="col-2 log_out">
+          <li> 
+            {% if user_id != None %}           
+            <a  href="/logout">LOG OUT</a> 
+            {% endif %}           
+          </li> 
+        </div>       
+  </div>          
     
-    {% if user_id != None %}
-    <div class="col-6 app_exp" style="width:200px"><a  href="/logout">LOG OUT</a></div>
-    {% endif %}
+    
   </div>
-
+  
+  <div class="container"> 
   <div class="row justify-content-center align-items-center">
     <div class="col-12 text-center">
       <p>
         <h1>THE PET TRACKER   &#128270   &#128062</h1>
       </p>
     </div>
+  </div>
   </div>
 
   
@@ -66,7 +79,7 @@
 
   {% if user_id == None %}
   <div class="container"> 
-    <div class="row">      
+    <div class="row justify-content-center align-items-center">      
       <div class="col-sm-12 col-md-6" id="signup">
         <h2>Create an Account</h2>
         <form action="/users" method="POST">

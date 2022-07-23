@@ -405,8 +405,8 @@ def get_matches():
                 for word in pet_color_lst:
                     if word in pet_look_color_lst:
                         color = True
-                        print(word)
-                        print(color)
+                        #print(word)
+                        #print(color)
                         break
             else:
                 if pet_color_lst[0] in pet_look_color_lst:
@@ -462,7 +462,7 @@ def change_pet_type():
     """Change the pet type to found."""  
     msg2=''
     id_lost_pet = session['pet_id'] 
-    print(request.json.get('match_pet_id'))        
+    #print(request.json.get('match_pet_id'))        
     id_match_pet = request.json.get('match_pet_id') 
     lost_pet=crud.get_pet_by_id(id_lost_pet)
     lost_pet.pet_type='found'
