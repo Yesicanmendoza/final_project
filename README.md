@@ -26,7 +26,7 @@ It's an app to help user find a lost pet. This application works by setting up a
 ### Homepage
 
 The homepage has a description about how the apps work and some tips about what to do in case that you have lost o rescued a pet.
-In this part, you must create an account and log in to use the navigation menu.
+In this part, you must create an account and log in to be able to use the navigation menu.
 
 ![Homepage](https://user-images.githubusercontent.com/80706744/178648646-32f5139d-b299-4e0d-986f-7348ea50f371.PNG)
 
@@ -35,9 +35,12 @@ In this part, you must create an account and log in to use the navigation menu.
 ### Pet Registration
 
 You must select the option of Register a lost/rescued pet from the navigation menu and enter the pet's information.
+The database has been fed with 30 rescued dogs and 30 rescued cats.
+If you want to look for a match of those pets, you should consider that those pets were rescued at April-01-2022, so if you enter that your pet got lost after that date, there won't be matched. Another thing to know is that those pets are in the Sacramento area and the algorithm requires there is no more than 30 miles between the zone where the animal was lost and rescued.
 
 ![Pet registration](https://user-images.githubusercontent.com/80706744/178648775-231ae0ed-0ef3-4fd5-b18c-49893c1b67ae.PNG)
 
+Other way to test this app is you can register lost and rescued pets, and check if they match.
 
 ### Look for a pet
 You will be redirected to this part of the app as soon as you finish the pet registration, but also you can access through the navigation menu.
