@@ -336,81 +336,21 @@ def get_matches():
     matches = []
     #Define matches according to the search criteria
     for pet in pet_list:
-        if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:
+        if pet.gender == pet_to_look.gender and pet.date >= pet_to_look.date:            
             
-            pet_breed_lst=[]
             pet_breed = copy(pet.breed)
-            #Code to check if, least, one in breed matches
-            if ',' in pet.breed:
-                pet_breed=pet.breed.split(',')
-            elif ' ' in pet.breed:
-                pet_breed=pet.breed.split(' ')             
-            if type(pet_breed) == type(pet_breed_lst):
-                pet_breed_lst.extend(pet_breed)
-            else:
-                pet_breed_lst.append(pet_breed)            
-            
-            
-            pet_look_breed_lst=[]
             pet_to_look_breed = copy(pet_to_look.breed)
-            if ',' in pet_to_look.breed:
-                pet_to_look_breed=pet_to_look.breed.split(',')
-            elif ' ' in pet_to_look.breed:
-                pet_to_look_breed=pet_to_look.breed.split(' ')
-            if type(pet_to_look_breed)==type(pet_look_breed_lst):        
-                pet_look_breed_lst.extend(pet_to_look_breed)
-            else:
-                pet_look_breed_lst.append(pet_to_look_breed)
+
+            #Code to check if, least, one in breed matches
+            breed = crud.check_one_word_match(pet_breed, pet_to_look_breed)     
             
-            breed = False
-            if len(pet_breed_lst) > 1:
-                for word in pet_breed_lst:
-                    if word in pet_look_breed_lst:
-                        breed = True                        
-                        break
-            else:
-                if pet_breed_lst[0] in pet_look_breed_lst:
-                    breed = True
 
             #Code to check if, least, one word in color matches
-            pet_color_lst=[]
+            
             pet_color = copy(pet.color)
-            if ',' in pet.color:
-                pet_color=pet.color.split(',')
-            elif ' ' in pet.color:
-                pet_color=pet.color.split(' ')            
-            
-
-            if type(pet_color)==type(pet_color_lst):        
-                pet_color_lst.extend(pet_color) 
-            else:
-                pet_color_lst.append(pet_color)           
-            
-            
-            pet_look_color_lst=[]
             pet_to_look_color=copy(pet_to_look.color)
-            if ',' in pet_to_look.color:
-                pet_to_look_color=pet_to_look.color.split(',')
-            elif ' ' in pet_to_look.color:
-                pet_to_look_color=pet_to_look.color.split(' ') 
-                        
             
-            if type(pet_to_look_color)== type(pet_look_color_lst):
-                pet_look_color_lst.extend(pet_to_look_color)
-            else:
-                pet_look_color_lst.append(pet_to_look_color)           
-            
-            color = False
-            if len(pet_color_lst) >1:
-                for word in pet_color_lst:
-                    if word in pet_look_color_lst:
-                        color = True
-                        #print(word)
-                        #print(color)
-                        break
-            else:
-                if pet_color_lst[0] in pet_look_color_lst:
-                    color = True
+            color = crud.check_one_word_match(pet_color, pet_to_look_color)
             
             if breed==True and color==True:
                 matches.append(pet)            
