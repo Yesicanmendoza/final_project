@@ -28,8 +28,7 @@ It's an app to help user find a lost pet. This application works by setting up a
 The homepage has a description about how the apps work and some tips about what to do in case that you have lost o rescued a pet.
 In this part, you must create an account and log in to be able to use the navigation menu.
 
-
-![Homepage](https://user-images.githubusercontent.com/80706744/178648646-32f5139d-b299-4e0d-986f-7348ea50f371.PNG)
+![Homepage](https://user-images.githubusercontent.com/80706744/182918991-71e85210-e275-4bc3-bf49-7cbee431fb9b.PNG)
 
 
 ### Pet Registration
@@ -38,7 +37,8 @@ You must select the option of Register a lost/rescued pet from the navigation me
 The database has been fed with 30 rescued dogs and 30 rescued cats.
 If you want to look for a match of those pets, you should consider that those pets were rescued at April-01-2022, so if you enter that your pet got lost after that date, there won't be matched. Another thing to know is that those pets are in the Sacramento area and the algorithm requires there is no more than 30 miles between the zone where the animal was lost and rescued.
 
-![Pet registration](https://user-images.githubusercontent.com/80706744/178648775-231ae0ed-0ef3-4fd5-b18c-49893c1b67ae.PNG)
+![Pet registration](https://user-images.githubusercontent.com/80706744/182919162-457d99e7-5f94-48f7-8453-2af39a869fa6.PNG)
+
 
 Other way to test this app is you can register lost and rescued pets, and check if they match.
 
@@ -50,7 +50,8 @@ This section of the app will show you the pet you have registered and give you t
 
 And you just need to click on the pet's name to do the option you have chosen.
 
-![Looking a match](https://user-images.githubusercontent.com/80706744/178648847-15fd1528-2e70-467c-b675-b4eb0c769746.PNG)
+![Looking a match](https://user-images.githubusercontent.com/80706744/182919248-3fb125a1-8798-40c9-b7e3-167ba32d1323.PNG)
+
 
 
 
@@ -59,4 +60,4 @@ And you just need to click on the pet's name to do the option you have chosen.
 After clicking on your pet's name you will be redirected to the last part of the app, where you can see if there are matched pets or not. In the first case, you will be able to see the picture of the pet and the email of the user that registered it, so you can contact this person.
 In case that you have found the pet you were looking for, you must submit the id of the pet, so  we can remove your pet and the matched one from the database.
 
-![Matchedfound](https://user-images.githubusercontent.com/80706744/178649524-31df24cb-97a6-4833-b582-e649d793586e.PNG)
+![Matchedfound](https://user-images.githubusercontent.com/80706744/182919331-d18efff2-3b6c-40e7-9b98-978cd4e6fc06.PNG)
