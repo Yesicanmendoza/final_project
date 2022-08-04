@@ -28,8 +28,8 @@ It's an app to help user find a lost pet. This application works by setting up a
 The homepage has a description about how the apps work and some tips about what to do in case that you have lost o rescued a pet.
 In this part, you must create an account and log in to be able to use the navigation menu.
 
-![Homepage](https://user-images.githubusercontent.com/80706744/178648646-32f5139d-b299-4e0d-986f-7348ea50f371.PNG)
 
+![Homepage](https://user-images.githubusercontent.com/80706744/178648646-32f5139d-b299-4e0d-986f-7348ea50f371.PNG)
 
 
 ### Pet Registration
